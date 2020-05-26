@@ -61,7 +61,8 @@ config :squidtree, SquidtreeWeb.Endpoint,
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/squidtree_web/(live|views)/.*(ex)$",
-      ~r"lib/squidtree_web/templates/.*(eex)$"
+      ~r"lib/squidtree_web/templates/.*(eex)$",
+      ~r"priv/post_contents/.*(md)$"
     ]
   ]
 
