@@ -36,6 +36,7 @@ defmodule Squidtree.MixProject do
       {:earmark, "~> 1.2"},
       {:ecto_sql, "~> 3.4"},
       {:gettext, "~> 0.11"},
+      {:html_sanitize_ex, "~> 1.3.0-rc3"},
       {:jason, "~> 1.0"},
       {:phoenix, "~> 1.5.3"},
       {:phoenix_ecto, "~> 4.1"},
@@ -46,7 +47,8 @@ defmodule Squidtree.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
-      {:yaml_elixir, "~> 1.3"}
+      {:timex, "~> 3.6.2"},
+      {:yaml_elixir, "~> 2.0"}
     ]
   end
 

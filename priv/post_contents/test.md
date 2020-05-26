@@ -1,12 +1,10 @@
 ---
 
-title: A Real Post
+title: A <b>Real</b> Post
 author: Shaine Hatch
-published_at: 2020-05-26 00:44
+published_at: 2020-05-26 00:44:00
 
 ---
-
-# Hello <b>Test</b>
 
 This is an article! I'm finally ready to start writing!
 
