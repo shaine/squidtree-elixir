@@ -17,8 +17,23 @@ defmodule SquidtreeWeb.BlogController do
       author: parsed_metadata["author"],
       content: content,
       published_on: parse_datetime_string_to_date(parsed_metadata["published_at"]),
+      tags: parse_tags(parsed_metadata["tags"]),
       title: parsed_metadata["title"]
     )
+  end
+
+  defp parse_tags(raw_tags) do
+    raw_tags
+    |> String.split(",")
+    |> Enum.map(&String.trim/1)
+    |> Enum.map(&parse_tag/1)
+  end
+
+  defp parse_tag(raw_tag) do
+    %{
+      name: raw_tag,
+      slug: Slug.slugify(raw_tag)
+    }
   end
 
   defp parse_datetime_string_to_date(datetime_string) do
