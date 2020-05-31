@@ -10,7 +10,8 @@ defmodule Squidtree.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_paths: ["test", "lib"]
     ]
   end
 
@@ -33,6 +34,8 @@ defmodule Squidtree.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:credo, "~> 1.2.0", only: [:dev, :test], runtime: false},
+      {:css_colors, "~> 0.2.2"},
       {:earmark, "~> 1.2"},
       {:ecto_sql, "~> 3.4"},
       {:gettext, "~> 0.11"},
@@ -46,6 +49,7 @@ defmodule Squidtree.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:postgrex, ">= 0.0.0"},
       {:slugify, "~> 1.3"},
+      {:sobelow, "~> 0.8", only: [:dev, :test]},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
       {:timex, "~> 3.6.2"},
@@ -64,7 +68,8 @@ defmodule Squidtree.MixProject do
       setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      validate: ["sobelow --config", "format", "credo --strict", "cmd mix test"]
     ]
   end
 end

@@ -1,8 +1,8 @@
-<h1><%= raw(@title) %></h1>
+<h1><%= raw(@title_html) %></h1>
 
 <p>By <%= @author %> on <time><%= date_format(@published_on) %></time></p>
 
-<%= raw(@content) %>
+<%= raw(@content_html) %>
 
 <p>Posted to <%= for {tag, i} <- Enum.with_index(@tags) do %>
   <a href="/blog/search?tag=<%= tag.slug %>"><%= tag.name %></a><%= unless last_item?(i, @tags), do: ", " %>

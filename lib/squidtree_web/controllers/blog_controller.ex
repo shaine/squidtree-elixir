@@ -1,45 +1,21 @@
+require Logger
+
 defmodule SquidtreeWeb.BlogController do
   use SquidtreeWeb, :controller
 
-  def show(conn, _params) do
-    {:ok, markdown} = File.read(Path.join(:code.priv_dir(:squidtree), "post_contents/test.md"))
-    # Only the top HR delineates metadata - the rest is content
-    [yaml | body] = markdown |> String.split("---\n", trim: true)
+  alias Squidtree.BlogPost
 
-    {:ok, parsed_metadata} = YamlElixir.read_from_string(yaml)
+  def show(conn, params) do
+    case params["slug"] |> BlogPost.get_blog_post() do
+      {:ok, blog_post, _} ->
+        render(conn, "show.html", Map.from_struct(blog_post))
 
-    {:ok, content, _warnings} =
-      body
-      |> Enum.join("---\n")
-      |> Earmark.as_html()
+      {:error, blog_post, warnings} ->
+        Enum.each(warnings, &Logger.warn/1)
+        render(conn, "show.html", Map.from_struct(blog_post))
 
-    render(conn, "show.html",
-      author: parsed_metadata["author"],
-      content: content,
-      published_on: parse_datetime_string_to_date(parsed_metadata["published_at"]),
-      tags: parse_tags(parsed_metadata["tags"]),
-      title: parsed_metadata["title"]
-    )
-  end
-
-  defp parse_tags(raw_tags) do
-    raw_tags
-    |> String.split(",")
-    |> Enum.map(&String.trim/1)
-    |> Enum.map(&parse_tag/1)
-  end
-
-  defp parse_tag(raw_tag) do
-    %{
-      name: raw_tag,
-      slug: Slug.slugify(raw_tag)
-    }
-  end
-
-  defp parse_datetime_string_to_date(datetime_string) do
-    with {:ok, date_time} <- NaiveDateTime.from_iso8601(datetime_string),
-         date <- NaiveDateTime.to_date(date_time) do
-      date
+      {:error, _message} ->
+        render(conn, SquidtreeWeb.ErrorView, "500.html")
     end
   end
 end
