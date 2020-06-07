@@ -1,31 +1,59 @@
-/* This file is for your main application css. */
-@import "./phoenix.css";
+@import "./reset.css";
 
-/* Alerts and form errors */
-.alert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
+:root {
+  --primary-background: #3C3C41;
+  --accent-background: #2A2A2F;
+  --primary-text-color: #FFFFFF;
+  --accent-text-color: #FFFFFF80;
 }
-.alert-info {
-  color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
+
+body {
+  background-color: var(--primary-background);
+  color: var(--primary-text-color);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  font-size: 14px;
 }
-.alert-warning {
-  color: #8a6d3b;
-  background-color: #fcf8e3;
-  border-color: #faebcc;
+
+@mixin heading-color {
+  color: var(--primary-text-color);
+
+  span {
+    color: var(--accent-text-color);
+  }
 }
-.alert-danger {
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
+
+h1 {
+  @include heading-color;
+  font-size: 32px;
+  font-weight: bold;
+
+  a:link, a:visited {
+    @include heading-color;
+    text-decoration: none;
+  }
 }
-.alert p {
-  margin-bottom: 0;
+
+h2 {
+  @include heading-color;
+  font-size: 20px;
+  font-weight: bold;
 }
-.alert:empty {
-  display: none;
+
+h3 {
+  @include heading-color;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+h4 {
+  @include heading-color;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+h5 {
+  color: var(--accent-text-color);
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
 }

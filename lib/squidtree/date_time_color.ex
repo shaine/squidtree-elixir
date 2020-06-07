@@ -10,13 +10,7 @@ defmodule Squidtree.DateTimeColor do
 
   # TODO Add color aging
 
-  def hex_color_string_for_date(date) do
-    hsl_color_for_date(date)
-    |> CssColors.rgb()
-    |> to_string
-  end
-
-  defp hsl_color_for_date(date),
+  def hsl_color_for_date(date),
     do: CssColors.hsl(hue_from_date(date), saturation_from_date(date), lightness_from_date(date))
 
   defp lightness_from_date(_date), do: 0.7

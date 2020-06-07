@@ -1,0 +1,6 @@
+<a href="/about"><h2>About</h2></a>
+<ul class="site-links">
+  <li><a href="https://github.com/shaine" target="_blank">GitHub</a></li>
+  <li><a href="/resume">Hire Me</a></li>
+  <li><a href="/contact">Contact</a></li>
+</ul>
