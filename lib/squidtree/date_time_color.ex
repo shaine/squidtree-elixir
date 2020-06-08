@@ -13,9 +13,9 @@ defmodule Squidtree.DateTimeColor do
   def hsl_color_for_date(date),
     do: CssColors.hsl(hue_from_date(date), saturation_from_date(date), lightness_from_date(date))
 
-  defp lightness_from_date(_date), do: 0.7
+  defp lightness_from_date(_date), do: 0.5
 
-  defp saturation_from_date(_date), do: 1
+  defp saturation_from_date(_date), do: 0.6
 
   defp hue_from_date(date) do
     ratio_of_year(date)

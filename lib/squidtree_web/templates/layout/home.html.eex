@@ -8,15 +8,23 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/home.css") %>"/>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+
+    <style>
+      :root {
+        --date-color: <%= assigns[:date_color] %>;
+      }
+    </style>
   </head>
 
   <body id="layout-home">
     <header>
       <section class="container">
-        <a href="/" class="logo">
-          <%= render("logo.html", %{foreground_color: assigns[:logo_color], background_color: assigns[:logo_shadow_color]}) %>
-          <h1>Squid<span>tree</span</h1>
-        </a>
+        <h1>
+          <a href="/" id="logo">
+            <%= render("logo.html") %>
+            Squid<span>tree</span>
+          </a>
+        </h1>
       </section>
     </header>
 

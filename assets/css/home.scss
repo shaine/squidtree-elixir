@@ -2,3 +2,123 @@ body {
   background-color: var(--accent-background);
   text-align: center;
 }
+
+a:link, a:visited {
+  color: var(--primary-text-color);
+  transition: var(--fade-time);
+  text-decoration: none;
+
+  span {
+    color: var(--accent-text-color);
+    transition: var(--fade-time);
+  }
+}
+
+a:hover, a:active {
+  color: var(--accent-text-color);
+  transition: var(--fade-time);
+
+  span {
+    color: var(--date-color);
+    transition: var(--fade-time);
+  }
+}
+
+nav {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 50px 0;
+
+  h1 {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  ul, ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  a:hover, a:active {
+    color: var(--accent-text-color);
+    transition: var(--fade-time);
+  }
+}
+
+#about-links {
+  border-right: 1px solid var(--date-color);
+  padding-right: 15px;
+  text-align: right;
+
+  h1 {
+    a:link::before, a:visited::before {
+      content: "\00AB";
+      color: var(--accent-text-color);
+      font-weight: bold;
+      padding-right: 5px;
+      transition: var(--fade-time);
+    }
+
+    a:hover::before, a:active::before {
+      color: var(--date-color);
+    }
+  }
+}
+
+#blog-links {
+  border-left: 1px solid var(--date-color);
+  padding-left: 15px;
+  text-align: left;
+
+  h1 {
+    a:link::after, a:visited::after {
+      content: "\00BB";
+      color: var(--accent-text-color);
+      font-weight: bold;
+      padding-left: 5px;
+      transition: var(--fade-time);
+    }
+
+    a:hover::after, a:active::after {
+      color: var(--date-color);
+    }
+  }
+}
+
+#logo {
+  display: inline-block;
+  padding-top: 15px;
+  transition: var(--fade-time);
+  width: 200px;
+
+  #logo-circle {
+    fill: var(--date-color) !important;
+    opacity: 1 !important;
+    transition: var(--fade-time);
+  }
+
+  &:hover {
+    color: var(--accent-text-color);
+
+    span {
+      color: var(--date-color);
+      transition: var(--fade-time);
+    }
+
+    #logo-circle {
+      fill: var(--primary-text-color) !important;
+      opacity: 0.5 !important;
+      transition: var(--fade-time);
+    }
+  }
+
+  #logo-circle {
+    transition: var(--fade-time);
+  }
+
+  svg {
+    height: 135px;
+    width: auto;
+  }
+}
