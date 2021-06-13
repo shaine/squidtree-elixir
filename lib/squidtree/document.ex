@@ -1,4 +1,4 @@
-defmodule Squidtree.BlogPost.Tag do
+defmodule Squidtree.Document.Tag do
   @moduledoc false
   @enforce_keys [:name, :slug]
 
@@ -6,8 +6,8 @@ defmodule Squidtree.BlogPost.Tag do
             slug: ""
 end
 
-defmodule Squidtree.BlogPost do
-  alias Squidtree.BlogPost.Tag
+defmodule Squidtree.Document do
+  alias Squidtree.Document.Tag
   alias __MODULE__
 
   @moduledoc false
@@ -20,7 +20,7 @@ defmodule Squidtree.BlogPost do
             title_html: "",
             content_html: ""
 
-  def get_blog_post(slug, options \\ []) do
+  def get_content(slug, options \\ []) do
     with {:ok, metadata, content_md} <- fetch_raw_blog_post(slug, options) do
       blog_post_token()
       |> set_title_html(metadata)
@@ -47,14 +47,13 @@ defmodule Squidtree.BlogPost do
       Keyword.get(
         options,
         :post_directory,
-        Path.join(:code.priv_dir(:squidtree), "post_contents")
+        Path.join(:code.priv_dir(:squidtree), "blog_contents")
       ),
-      # Reslugify the slug to ensure filepath safety
-      "#{Slug.slugify(slug)}.md"
+      "#{slug}.md"
     )
   end
 
-  defp blog_post_token, do: {:ok, %BlogPost{}, []}
+  defp blog_post_token, do: {:ok, %Document{}, []}
 
   defp set_field(value, {status, blog_post, warnings}, key) do
     {status, %{blog_post | key => value}, warnings}
@@ -75,16 +74,25 @@ defmodule Squidtree.BlogPost do
     |> set_field(token, :title)
   end
 
-  defp set_published_on(token, metadata) do
-    with raw_published_at <- to_string(metadata["published_at"]),
+  defp set_published_on(token, %{"published_at" => date_string}),
+    do: set_published_on_from_string(token, to_string(date_string))
+
+  defp set_published_on(token, %{"date" => date_string}),
+    do: set_published_on_from_string(token, to_string(date_string) <> ":00")
+
+  defp set_published_on(token, _metadata),
+    do: set_published_on_from_string(token, DateTime.utc_now)
+
+  defp set_published_on_from_string(token, date_string) do
+    with raw_published_at <- date_string,
          {:ok, date_time} <- NaiveDateTime.from_iso8601(raw_published_at),
          date <- NaiveDateTime.to_date(date_time) do
       date |> set_field(token, :published_on)
     else
       {:error, message} ->
         set_warning(
-          "published_on #{message}",
-          set_field(metadata["published_at"], token, :published_on)
+          "published_on #{message}: #{date_string}",
+          set_field(date_string, token, :published_on)
         )
     end
   end
@@ -100,13 +108,17 @@ defmodule Squidtree.BlogPost do
     |> set_field(token, :author)
   end
 
-  defp set_tags(token, metadata) do
-    metadata["tags"]
+  defp set_tags(token, %{"tags" => nil} = metadata), do: set_tags(token, %{metadata | "tags" => ""})
+
+  defp set_tags(token, %{"tags" => tags}) do
+    tags
     |> String.split(",")
     |> Enum.map(&String.trim/1)
     |> Enum.map(&parse_tag/1)
     |> set_field(token, :tags)
   end
+
+  defp set_tags(token, _metadata), do: set_field([], token, :tags)
 
   defp parse_tag(raw_tag) do
     %Tag{
@@ -116,7 +128,7 @@ defmodule Squidtree.BlogPost do
   end
 
   defp set_content_html(token, content_md) do
-    case Earmark.as_html(content_md) do
+    case Earmark.as_html(content_md, wikilinks: true) do
       {:ok, content_html, _warnings} ->
         set_field(content_html, token, :content_html)
 

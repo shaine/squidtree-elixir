@@ -7,23 +7,31 @@
     <title><%= assigns[:page_title] %></title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+
+    <style>
+      :root {
+        --date-color: <%= assigns[:date_color] %>;
+      }
+    </style>
   </head>
 
-  <body>
-    <header>
-      <section class="container">
-        <a href="/" class="logo">
-          <%= render("logo.html", %{foreground_color: assigns[:logo_color], background_color: assigns[:logo_shadow_color]}) %>
-          <h1>Squid<span>tree</span</h1>
-        </a>
-      </section>
-    </header>
+  <body class="layout-<%= assigns[:layout_name] %>">
+    <div class="page-container">
+      <header class="page-header">
+        <section class="container">
+          <a href="/" id="logo">
+            <%= render("logo.html") %>
+            <span class="logo-text">Squid<span class="logo-suffix">tree</span></span>
+          </a>
+        </section>
+      </header>
 
-    <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <main role="main" class="container">
+        <div class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></div>
+        <div class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></div>
 
-      <%= @inner_content %>
-    </main>
+        <%= @inner_content %>
+      </main>
+    </div>
   </body>
 </html>

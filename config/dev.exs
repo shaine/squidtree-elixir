@@ -1,14 +1,5 @@
 use Mix.Config
 
-# Configure your database
-config :squidtree, Squidtree.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "squidtree_dev",
-  hostname: "localhost",
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
-
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -62,7 +53,8 @@ config :squidtree, SquidtreeWeb.Endpoint,
       ~r"priv/gettext/.*(po)$",
       ~r"lib/squidtree_web/(live|views)/.*(ex)$",
       ~r"lib/squidtree_web/templates/.*(eex)$",
-      ~r"priv/post_contents/.*(md)$"
+      ~r"priv/blog_contents/.*(md)$",
+      ~r"priv/note_contents/zk/.*(md)$"
     ]
   ]
 

@@ -19,6 +19,8 @@ defmodule SquidtreeWeb.Router do
     get "/", PageController, :index
 
     get "/blog/:slug", BlogController, :show
+    get "/notes/:id", NoteController, :show
+    get "/notes", NoteController, :index
   end
 
   # Other scopes may use custom stacks.

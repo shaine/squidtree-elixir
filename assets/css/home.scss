@@ -1,124 +1,109 @@
-body {
+body.layout-home {
   background-color: var(--accent-background);
   text-align: center;
-}
 
-a:link, a:visited {
-  color: var(--primary-text-color);
-  transition: var(--fade-time);
-  text-decoration: none;
+  #logo {
+    display: inline-block;
+    font-size: 32px;
+    width: 200px;
 
-  span {
-    color: var(--accent-text-color);
-    transition: var(--fade-time);
-  }
-}
-
-a:hover, a:active {
-  color: var(--accent-text-color);
-  transition: var(--fade-time);
-
-  span {
-    color: var(--date-color);
-    transition: var(--fade-time);
-  }
-}
-
-nav {
-  display: grid;
-  grid-template-columns: auto auto;
-  padding: 50px 0;
-
-  h1 {
-    font-size: 20px;
-    font-weight: bold;
+    svg {
+      height: 135px;
+    }
   }
 
-  ul, ol {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  main {
+    padding-top: 25px;
   }
 
-  a:hover, a:active {
-    color: var(--accent-text-color);
-    transition: var(--fade-time);
+  .introduction {
+    font-size: 14px;
   }
-}
 
-#about-links {
-  border-right: 1px solid var(--date-color);
-  padding-right: 15px;
-  text-align: right;
+  #home-nav {
+    margin-top: 50px;
 
-  h1 {
-    a:link::before, a:visited::before {
-      content: "\00AB";
+    a:link, a:visited {
+      color: var(--primary-text-color);
+      transition: var(--fade-time);
+      text-decoration: none;
+
+      span {
+        color: var(--accent-text-color);
+        transition: var(--fade-time);
+      }
+    }
+
+    a:hover, a:active {
       color: var(--accent-text-color);
-      font-weight: bold;
-      padding-right: 5px;
       transition: var(--fade-time);
-    }
 
-    a:hover::before, a:active::before {
-      color: var(--date-color);
+      span {
+        color: var(--date-color);
+        transition: var(--fade-time);
+      }
     }
   }
-}
 
-#blog-links {
-  border-left: 1px solid var(--date-color);
-  padding-left: 15px;
-  text-align: left;
+  nav {
+    display: grid;
+    grid-template-columns: auto auto;
 
-  h1 {
-    a:link::after, a:visited::after {
-      content: "\00BB";
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    ul, ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    a:hover, a:active {
       color: var(--accent-text-color);
-      font-weight: bold;
-      padding-left: 5px;
-      transition: var(--fade-time);
-    }
-
-    a:hover::after, a:active::after {
-      color: var(--date-color);
-    }
-  }
-}
-
-#logo {
-  display: inline-block;
-  padding-top: 15px;
-  transition: var(--fade-time);
-  width: 200px;
-
-  #logo-circle {
-    fill: var(--date-color) !important;
-    opacity: 1 !important;
-    transition: var(--fade-time);
-  }
-
-  &:hover {
-    color: var(--accent-text-color);
-
-    span {
-      color: var(--date-color);
-      transition: var(--fade-time);
-    }
-
-    #logo-circle {
-      fill: var(--primary-text-color) !important;
-      opacity: 0.5 !important;
       transition: var(--fade-time);
     }
   }
 
-  #logo-circle {
-    transition: var(--fade-time);
+  #about-links {
+    border-right: 1px solid var(--date-color);
+    padding-right: 15px;
+    text-align: right;
+
+    h1 {
+      a:link::before, a:visited::before {
+        content: "\00AB";
+        color: var(--accent-text-color);
+        font-weight: bold;
+        padding-right: 5px;
+        transition: var(--fade-time);
+      }
+
+      a:hover::before, a:active::before {
+        color: var(--date-color);
+      }
+    }
   }
 
-  svg {
-    height: 135px;
-    width: auto;
+  #blog-links {
+    border-left: 1px solid var(--date-color);
+    padding-left: 15px;
+    text-align: left;
+
+    h1 {
+      a:link::after, a:visited::after {
+        content: "\00BB";
+        color: var(--accent-text-color);
+        font-weight: bold;
+        padding-left: 5px;
+        transition: var(--fade-time);
+      }
+
+      a:hover::after, a:active::after {
+        color: var(--date-color);
+      }
+    }
   }
 }

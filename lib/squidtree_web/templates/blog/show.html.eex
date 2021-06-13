@@ -1,9 +1,13 @@
-<h1><%= raw(@title_html) %></h1>
+<div class="post-header">
+  <h1><%= raw(@title_html) %></h1>
 
-<p>By <%= @author %> on <time><%= date_format(@published_on) %></time></p>
+  <p class="post-author-line post-meta"><%= @author %> on <time><%= date_format(@published_on) %></time></p>
 
-<%= raw(@content_html) %>
+  <p class="post-tags-line post-meta"><%= for {tag, i} <- Enum.with_index(@tags) do %>
+    <a href="/blog/search?tag=<%= tag.slug %>"><%= tag.name %></a><%= unless last_item?(i, @tags), do: ", " %>
+  <% end %></p>
+</div>
 
-<p>Posted to <%= for {tag, i} <- Enum.with_index(@tags) do %>
-  <a href="/blog/search?tag=<%= tag.slug %>"><%= tag.name %></a><%= unless last_item?(i, @tags), do: ", " %>
-<% end %></p>
+<div class="post-content">
+  <%= raw(@content_html) %>
+</div>

@@ -1,66 +1,201 @@
-@import "reset.css";
+$breakpoint-desktop: 700px;
 
 :root {
-  --primary-background: #3C3C41;
+  // --primary-background: #3C3C41;
+  --primary-background: var(--accent-background);
   --accent-background: #2A2A2F;
   --primary-text-color: #FFFFFF;
   --accent-text-color: #FFFFFF80;
+  --aside-text-color: #FFFFFFA0;
   --fade-time: 0.3s;
+  --primary-font-size: 18px;
+  --small-font-size: 14px;
 }
 
 body {
   background-color: var(--primary-background);
   color: var(--primary-text-color);
   font-family: "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
-  font-size: 14px;
+  font-size: var(--primary-font-size);
+  margin: 0 15px 60px 15px;
 }
 
-@mixin heading-color {
-  color: var(--primary-text-color);
+a:link, a:visited {
+  color: var(--accent-text-color);
+  transition: var(--fade-time);
+  text-decoration: none;
+}
 
-  span {
-    color: var(--accent-text-color);
+a:hover, a:active {
+  color: var(--date-color);
+  transition: var(--fade-time);
+}
+
+::selection {
+  background-color: var(--date-color);
+}
+
+main {
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+.page-header {
+  background-color: var(--accent-background);
+  padding: 25px 0;
+  text-align: center;
+}
+
+#logo {
+  color: var(--primary-text-color);
+  display: inline-block;
+  font-size: 26px;
+  font-weight: bold;
+  transition: var(--fade-time);
+  width: 200px;
+
+  #logo-circle {
+    fill: var(--date-color) !important;
+    opacity: 1 !important;
     transition: var(--fade-time);
   }
-}
 
-h1, h2, h3, h4, h5 {
-  a:link, a:visited, a:hover, a:active {
-    text-decoration: none;
+  .logo-suffix {
+    color: var(--accent-text-color);
+  }
+
+  &:hover {
+    color: var(--accent-text-color);
+
+    .logo-suffix {
+      color: var(--date-color);
+      transition: var(--fade-time);
+    }
+
+    #logo-circle {
+      fill: var(--primary-text-color) !important;
+      opacity: 0.5 !important;
+      transition: var(--fade-time);
+    }
+  }
+
+  #logo-circle {
+    transition: var(--fade-time);
+  }
+
+  svg {
+    height: 100px;
+    width: auto;
   }
 }
 
 h1 {
-  @include heading-color;
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 3em;
+  margin: 0 0 30px 0;
 
-  a:link, a:visited {
-    @include heading-color;
+  span, b {
+    color: var(--date-color);
+    transition: var(--fade-time);
   }
 }
 
 h2 {
-  @include heading-color;
-  font-size: 20px;
+  color: var(--date-color);
+  font-size: 1.8em;
   font-weight: bold;
+  margin: 30px 0 10px;
 }
 
 h3 {
-  @include heading-color;
-  font-size: 18px;
+  color: var(--primary-text-color);
+  font-size: 1.5em;
   font-weight: bold;
+  margin: 20px 0 10px;
 }
 
 h4 {
-  @include heading-color;
-  font-size: 16px;
+  color: var(--accent-text-color);
+  font-size: 1em;
   font-weight: bold;
+  margin: 30px 0 10px;
 }
 
 h5 {
-  color: var(--accent-text-color);
-  font-size: 12px;
+  color: var(--date-color);
+  font-size: 0.8em;
   font-weight: bold;
   text-transform: uppercase;
+  margin: 20px 0 10px;
+}
+
+hr {
+  border: none;
+  border-top: 3px solid var(--date-color);
+  margin: 40px 0;
+}
+
+p {
+  margin: 0 0 15px;
+}
+
+em {
+  color: var(--aside-text-color);
+  font-size: 0.7em;
+}
+
+blockquote {
+  border-left: 3px solid var(--date-color);
+  color: var(--accent-text-color);
+  display: block;
+  margin-left: 10px;
+  padding-left: 10px;
+}
+
+.post-meta {
+  font-size: var(--small-font-size);
+  margin-bottom: 0;
+}
+
+.post-header {
+  margin-bottom: 30px;
+}
+
+.post-content {
+  h1 {
+    font-size: 2em;
+  }
+
+  a:link, a:visited {
+    color: var(--date-color);
+    text-decoration: underline;
+    transition: var(--fade-time);
+  }
+
+  a:active, a:hover {
+    color: var(--accent-text-color);
+    transition: var(--fade-time);
+  }
+
+  ul {
+    list-style: none;
+
+    li::before {
+      color: var(--date-color);
+      content: "\25AA\00FE0E";
+      display: inline-block;
+      margin-left: -1em;
+      width: 1em;
+    }
+  }
+}
+
+@media (min-width: $breakpoint-desktop) {
+  body {
+    margin: 0;
+  }
+
+  main {
+    padding: 50px;
+    width: 600px;
+  }
 }

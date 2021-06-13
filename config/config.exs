@@ -7,9 +7,6 @@
 # General application configuration
 use Mix.Config
 
-config :squidtree,
-  ecto_repos: [Squidtree.Repo]
-
 # Configures the endpoint
 config :squidtree, SquidtreeWeb.Endpoint,
   url: [host: "localhost"],

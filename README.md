@@ -3,7 +3,6 @@
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
   * Install Node.js dependencies with `npm install` inside the `assets` directory
   * Start Phoenix endpoint with `mix phx.server`
 
@@ -18,3 +17,18 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+## TODO
+
+### Launch
+
+- Display ZK metadata
+- Fix ZK index
+- Create docker container
+
+### Longterm
+
+- Fix blog post title
+- Get layout name from view into layout container
+- Differentiate wikilinks in notes from "real" links in blog posts - size, color, etc
+- Add background variations incl date color

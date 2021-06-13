@@ -7,8 +7,6 @@ defmodule Squidtree.Application do
 
   def start(_type, _args) do
     children = [
-      # Start the Ecto repository
-      Squidtree.Repo,
       # Start the Telemetry supervisor
       SquidtreeWeb.Telemetry,
       # Start the PubSub system

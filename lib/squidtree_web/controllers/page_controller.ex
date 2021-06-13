@@ -1,7 +1,8 @@
 defmodule SquidtreeWeb.PageController do
   use SquidtreeWeb, :controller
 
-  def index(conn, _params) do
-    render(conn, "index.html", layout: {SquidtreeWeb.LayoutView, "home.html"})
-  end
+  alias SquidtreeWeb.Router.Helpers
+
+  def index(conn, _params),
+    do: render(conn, "home.html", %{layout_name: :home})
 end

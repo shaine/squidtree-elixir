@@ -1,0 +1,23 @@
+<p class="introduction">A website where Shaine Hatch <em>(humbly)</em> commemorates himself.</p>
+
+<nav id="home-nav">
+  <section id="about-links">
+    <!-- <h1><a href="/about">About</a></h1> -->
+    <h1>About</h1>
+
+    <ul>
+      <li><a href="https://github.com/shaine" target="_blank"><span>Git</span>Hub</a></li>
+      <!-- <li><a href="/resume">Hire <span>Me</span></a></li> -->
+      <li><a href="mailto:shaine@squidtree.com">Contact</a></li>
+    </ul>
+  </section>
+
+  <section id="blog-links">
+    <h1><a href="/notes">Notes</a></h1>
+
+    <!-- <ul>
+      <li><a href="/blog/test">Test</a></li>
+      <li><a href="/notes">Zettelkasten</a></li>
+    </ul> -->
+  </section>
+</nav>

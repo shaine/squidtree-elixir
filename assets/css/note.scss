@@ -1,0 +1,26 @@
+.layout-note {
+  .post-content {
+    a {
+      transition: var(--fade-time);
+    }
+
+    a::before {
+      color: var(--date-color);
+      content: "[[";
+      transition: var(--fade-time);
+    }
+
+    a::after {
+      color: var(--date-color);
+      content: "]]";
+      transition: var(--fade-time);
+    }
+
+    a:active, a:hover {
+      &::before, &::after {
+        color: var(--accent-text-color);
+        transition: var(--fade-time);
+      }
+    }
+  }
+}

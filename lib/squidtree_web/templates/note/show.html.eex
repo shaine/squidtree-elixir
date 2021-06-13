@@ -1,0 +1,3 @@
+<div class="post-content">
+  <%= raw(@content_html) %>
+</div>

@@ -11,7 +11,8 @@ defmodule Squidtree.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      test_paths: ["test", "lib"]
+      test_paths: ["lib"]
+      # test_paths: ["test"]
     ]
   end
 
@@ -37,12 +38,10 @@ defmodule Squidtree.MixProject do
       {:credo, "~> 1.2.0", only: [:dev, :test], runtime: false},
       {:css_colors, "~> 0.2.2"},
       {:earmark, "~> 1.2"},
-      {:ecto_sql, "~> 3.4"},
       {:gettext, "~> 0.11"},
       {:html_sanitize_ex, "~> 1.3.0-rc3"},
       {:jason, "~> 1.0"},
       {:phoenix, "~> 1.5.3"},
-      {:phoenix_ecto, "~> 4.1"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_dashboard, "~> 0.2.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
@@ -65,10 +64,8 @@ defmodule Squidtree.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      setup: ["deps.get", "cmd npm install --prefix assets"],
+      test: ["test"],
       validate: ["sobelow --config", "format", "credo --strict", "cmd mix test"]
     ]
   end
