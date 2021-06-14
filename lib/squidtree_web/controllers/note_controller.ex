@@ -11,7 +11,7 @@ defmodule SquidtreeWeb.NoteController do
   def show(conn, params) do
     case params["id"]
          |> Document.get_content(
-           post_directory: Path.join(:code.priv_dir(:squidtree), "note_contents/zk")
+           post_directory: Path.join(:code.priv_dir(:squidtree), "note_contents")
          ) do
       {:ok, note, _} ->
         render(conn, "show.html", assigns_from_content(note))

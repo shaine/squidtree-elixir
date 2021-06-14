@@ -8,21 +8,13 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+## Production
 
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+- Build the docker image: `. ./.env; docker build --build-arg SECRET_KEY_BASE .`
+- Run the docker image: `docker run -p 4000:4000 -v ~/Documents/notes/zk:/app/priv/note_contents:ro -v ~/Documents/notes/publications:/app/priv/blog_contents:ro -it $(docker images --format "{{.ID}} {{.CreatedAt}}" | sort -rk 2 | awk 'NR==1{print $1}')`
+- Verify the image by visiting <http://localhost:4000>
 
 ## TODO
-
-### Launch
-
-- Create docker container
 
 ### Longterm
 

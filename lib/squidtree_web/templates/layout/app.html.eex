@@ -14,6 +14,10 @@
         --date-color: <%= assigns[:date_color] %>;
         --date-color-decimals: <%= assigns[:date_color_decimals] %>;
       }
+
+      html {
+        display: none;
+      }
     </style>
   </head>
 

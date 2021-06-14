@@ -54,7 +54,7 @@ config :squidtree, SquidtreeWeb.Endpoint,
       ~r"lib/squidtree_web/(live|views)/.*(ex)$",
       ~r"lib/squidtree_web/templates/.*(eex)$",
       ~r"priv/blog_contents/.*(md)$",
-      ~r"priv/note_contents/zk/.*(md)$"
+      ~r"priv/note_contents/.*(md)$"
     ]
   ]
 
