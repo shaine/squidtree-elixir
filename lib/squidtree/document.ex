@@ -12,8 +12,9 @@ defmodule Squidtree.Document do
 
   @moduledoc false
 
-  defstruct title: "",
-            slug: "",
+  defstruct id: nil,
+            title: "",
+            title_slug: "",
             author: "",
             published_on: nil,
             tags: [],
@@ -22,11 +23,11 @@ defmodule Squidtree.Document do
 
   def get_content(slug, options \\ []) do
     with {:ok, metadata, content_md} <- fetch_raw_blog_post(slug, options) do
-      blog_post_token()
+      blog_post_token(slug)
       |> set_title_html(metadata)
       |> set_title(metadata)
       |> set_published_on(metadata)
-      |> set_slug(metadata)
+      |> set_title_slug(metadata)
       |> set_author(metadata)
       |> set_tags(metadata)
       |> set_content_html(content_md)
@@ -35,8 +36,10 @@ defmodule Squidtree.Document do
 
   defp fetch_raw_blog_post(slug, options) do
     with {:ok, markdown} <- path_to_post_for_slug(slug, options) |> File.read(),
-         [yaml | body_segments] <- markdown |> String.split("---\n", trim: true),
+         [yaml | body_segments] <-
+           markdown |> String.split("---\n", trim: true) |> ensure_metadata,
          {:ok, metadata} <- YamlElixir.read_from_string(yaml),
+         metadata <- Map.put(metadata, :slug, slug),
          content_md <- body_segments |> Enum.join("---\n") do
       {:ok, metadata, content_md}
     end
@@ -53,7 +56,10 @@ defmodule Squidtree.Document do
     )
   end
 
-  defp blog_post_token, do: {:ok, %Document{}, []}
+  defp ensure_metadata(body_segments) when length(body_segments) > 1, do: body_segments
+  defp ensure_metadata(body_segments) when length(body_segments) == 1, do: ["" | body_segments]
+
+  defp blog_post_token(slug), do: {:ok, %Document{id: slug}, []}
 
   defp set_field(value, {status, blog_post, warnings}, key) do
     {status, %{blog_post | key => value}, warnings}
@@ -69,7 +75,7 @@ defmodule Squidtree.Document do
   end
 
   defp set_title(token, metadata) do
-    metadata["title"]
+    Map.get(metadata, "title", metadata[:slug])
     |> HtmlSanitizeEx.strip_tags()
     |> set_field(token, :title)
   end
@@ -81,7 +87,7 @@ defmodule Squidtree.Document do
     do: set_published_on_from_string(token, to_string(date_string) <> ":00")
 
   defp set_published_on(token, _metadata),
-    do: set_published_on_from_string(token, DateTime.utc_now)
+    do: set_field(DateTime.utc_now(), token, :published_on)
 
   defp set_published_on_from_string(token, date_string) do
     with raw_published_at <- date_string,
@@ -97,10 +103,10 @@ defmodule Squidtree.Document do
     end
   end
 
-  defp set_slug({_status, blog_post, _warnings} = token, _metadata) do
+  defp set_title_slug({_status, blog_post, _warnings} = token, _metadata) do
     blog_post.title
     |> Slug.slugify()
-    |> set_field(token, :slug)
+    |> set_field(token, :title_slug)
   end
 
   defp set_author(token, metadata) do
@@ -108,11 +114,12 @@ defmodule Squidtree.Document do
     |> set_field(token, :author)
   end
 
-  defp set_tags(token, %{"tags" => nil} = metadata), do: set_tags(token, %{metadata | "tags" => ""})
+  defp set_tags(token, %{"tags" => nil} = metadata),
+    do: set_tags(token, %{metadata | "tags" => ""})
 
   defp set_tags(token, %{"tags" => tags}) do
     tags
-    |> String.split(",")
+    |> String.split(",", trim: true)
     |> Enum.map(&String.trim/1)
     |> Enum.map(&parse_tag/1)
     |> set_field(token, :tags)

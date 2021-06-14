@@ -6,7 +6,7 @@ defmodule SquidtreeWeb.NoteController do
   alias Squidtree.Document
 
   def index(conn, params),
-    do: show(conn, Map.merge(%{"id" => "index"}, params))
+    do: show(conn, Map.put(params, "id", "index"))
 
   def show(conn, params) do
     case params["id"]
@@ -26,5 +26,6 @@ defmodule SquidtreeWeb.NoteController do
     end
   end
 
-  defp assigns_from_content(content), do: Map.from_struct(content) |> Map.put(:layout_name, :note)
+  defp assigns_from_content(content),
+    do: Map.from_struct(content) |> Map.merge(%{layout_name: :note, base_path: "/notes/"})
 end

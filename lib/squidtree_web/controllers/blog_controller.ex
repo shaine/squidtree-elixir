@@ -19,5 +19,6 @@ defmodule SquidtreeWeb.BlogController do
     end
   end
 
-  defp assigns_from_content(content), do: Map.from_struct(content) |> Map.put(:layout_name, :blog)
+  defp assigns_from_content(content),
+    do: Map.from_struct(content) |> Map.merge(%{layout_name: :blog, base_path: "/blog/"})
 end

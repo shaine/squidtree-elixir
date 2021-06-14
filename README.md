@@ -22,8 +22,6 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ### Launch
 
-- Display ZK metadata
-- Fix ZK index
 - Create docker container
 
 ### Longterm
