@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e # Abort on error
+
+. ./.env
+
+echo "Building docker image"
+docker build --build-arg SECRET_KEY_BASE -t squidtree .
+echo "Saving docker image"
+docker save squidtree:latest | gzip > squidtree.tar.gz
+
+echo "Moving docker image"
+cp squidtree.tar.gz ~/Documents/docker_builds/squidtree.tar.gz

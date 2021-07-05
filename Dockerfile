@@ -18,6 +18,7 @@ COPY . "$WORKDIR"
 WORKDIR "$WORKDIR"
 
 RUN mix local.hex --force &&\
+  mix local.rebar --force &&\
   MIX_ENV=prod mix deps.get --only prod &&\
   MIX_ENV=prod mix compile &&\
   curl -sL https://deb.nodesource.com/setup_$NODE_MAJOR.x | bash - && apt-get install -y nodejs inotify-tools &&\

@@ -35,7 +35,8 @@ npm-debug.log
 
 .env
 docker_builds
-squidtree.tar.gz # Docker build
+# Docker build
+squidtree.tar.gz
 
 # Ignore content dirs
 /priv/blog_contents
