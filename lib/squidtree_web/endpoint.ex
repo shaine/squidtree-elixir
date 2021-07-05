@@ -24,7 +24,7 @@ defmodule SquidtreeWeb.Endpoint do
     at: "/",
     from: :squidtree,
     gzip: false,
-    only: ~w(css fonts images js resumes favicon.ico robots.txt)
+    only: ~w(css fonts images js resumes favicon.ico robots.txt site.webmanifest safari-pinned-tab.svg mstile-150x150.png favicon-32x32.png favicon-16x16.png cache_manifest.json browserconfig.xml apple-touch-icon.png android-chrome-144x144.png)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
