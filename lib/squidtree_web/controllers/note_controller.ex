@@ -27,5 +27,5 @@ defmodule SquidtreeWeb.NoteController do
   end
 
   defp assigns_from_content(content),
-    do: Map.from_struct(content) |> Map.merge(%{layout_name: :note, base_path: "/notes/"})
+    do: Map.from_struct(content) |> Map.merge(%{layout_name: :note, base_path: "/notes/", page_description: content.content_preview})
 end

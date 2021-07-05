@@ -20,7 +20,8 @@ defmodule Squidtree.Document do
             published_on: nil,
             tags: [],
             title_html: "",
-            content_html: ""
+            content_html: "",
+            content_preview: ""
 
   def get_content(slug, options \\ []) do
     with {:ok, metadata, content_md} <- fetch_raw_blog_post(slug, options) do
@@ -33,6 +34,7 @@ defmodule Squidtree.Document do
       |> set_reference(metadata)
       |> set_tags(metadata)
       |> set_content_html(content_md)
+      |> set_content_preview(content_md)
     end
   end
 
@@ -149,5 +151,19 @@ defmodule Squidtree.Document do
       {:error, message} ->
         set_warning("content_html: #{message}", token)
     end
+  end
+
+  defp set_content_preview(token, content_md) do
+    content_md
+    |> String.split("---\n", trim: true) # Split by <hr>s
+    |> hd # Just the top section
+    |> String.replace(~r/^# .*/m, "") # Remove redundant H1
+    |> String.replace(~r/^#+ /m, "") # Remove heading prefixes
+    |> String.replace(~r/\[\[[0-9A-Z]*\]\]/m, "") # Remove links
+    |> String.replace(~r/^ ?+-/m, "") # Remove bullets
+    |> String.replace(~r/ \./m, ".") # Fix period spaces
+    |> String.replace(~r/\n/m, "") # Remove line breaks
+    |> String.trim # Remove trailing space
+    |> set_field(token, :content_preview)
   end
 end

@@ -10,10 +10,19 @@
     <meta name="author" content="Shaine Hatch" />
     <meta name="description" content="<%= assigns[:page_description] %>" />
 
+    <%= if assigns[:published_on] do %>
+    <!-- Article stuff -->
+    <meta name="type" content="article" />
+    <meta property="article:published_time" content="<%= assigns[:published_on] %>" />
+    <meta property="og:type" content="article" />
+    <% end %>
+
+    <!-- Facebook OpenGraph -->
     <meta property="og:site_name" content="Squidtree">
     <meta property="og:title" content="<%= assigns[:title] %>">
     <meta property="og:description" content="<%= assigns[:page_description] %>">
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="<%= assigns[:title] %>">
     <meta name="twitter:description" content="<%= assigns[:page_description] %>">
