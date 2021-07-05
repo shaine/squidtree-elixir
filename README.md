@@ -10,15 +10,23 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ## Production
 
-- Build the docker image: `. ./.env; docker build --build-arg SECRET_KEY_BASE .`
+- Build the docker image: `. ./.env; docker build --build-arg SECRET_KEY_BASE -t squidtree .`
 - Run the docker image: `docker run -p 4000:4000 -v ~/Documents/notes/zk:/app/priv/note_contents:ro -v ~/Documents/notes/publications:/app/priv/blog_contents:ro -it $(docker images --format "{{.ID}} {{.CreatedAt}}" | sort -rk 2 | awk 'NR==1{print $1}')`
 - Verify the image by visiting <http://localhost:4000>
+- Export the image for import: `docker save squidtree:latest | gzip > squidtree.tar.gz`
 
 ## TODO
 
+### Next Up
+
+- Scan notes into temp DB
+- Add copyright notice
+- Add About page
+- Add Blog page
+- Add "Latest in ZK" content
+- Explain chosen color
+
 ### Longterm
 
-- Fix blog post title
 - Get layout name from view into layout container
-- Differentiate wikilinks in notes from "real" links in blog posts - size, color, etc
 - Add background variations incl date color

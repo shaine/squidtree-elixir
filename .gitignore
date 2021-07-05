@@ -34,3 +34,5 @@ npm-debug.log
 /priv/static/
 
 .env
+docker_builds
+squidtree.tar.gz # Docker build

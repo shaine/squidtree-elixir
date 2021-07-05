@@ -14,7 +14,8 @@ defmodule SquidtreeWeb.BlogController do
         Enum.each(warnings, &Logger.warn/1)
         render(conn, "show.html", assigns_from_content(blog_post))
 
-      {:error, _message} ->
+      {:error, message} ->
+        Logger.warn(message)
         render(conn, SquidtreeWeb.ErrorView, "500.html")
     end
   end

@@ -16,6 +16,7 @@ defmodule Squidtree.Document do
             title: "",
             title_slug: "",
             author: "",
+            reference: "",
             published_on: nil,
             tags: [],
             title_html: "",
@@ -29,6 +30,7 @@ defmodule Squidtree.Document do
       |> set_published_on(metadata)
       |> set_title_slug(metadata)
       |> set_author(metadata)
+      |> set_reference(metadata)
       |> set_tags(metadata)
       |> set_content_html(content_md)
     end
@@ -112,6 +114,11 @@ defmodule Squidtree.Document do
   defp set_author(token, metadata) do
     metadata["author"]
     |> set_field(token, :author)
+  end
+
+  defp set_reference(token, metadata) do
+    metadata["citation"]
+    |> set_field(token, :reference)
   end
 
   defp set_tags(token, %{"tags" => nil} = metadata),

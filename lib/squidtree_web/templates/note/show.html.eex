@@ -1,15 +1,18 @@
+<article>
 <%= if @id != "index" do %>
-<pre class="note-metadata">
+  <pre class="note-metadata">
 id: <%= @id %>
 title: <%= @title %>
-date: <%= @published_on %>
-<%= unless Enum.empty?(@tags) do %>
+date: <%= @published_on %><%= unless Enum.empty?(@tags) do %>
 tags: <%= Enum.map(@tags, &(Map.get(&1, :slug))) |> Enum.join(" ") %>
+<% end %><%= if @reference do %>
+reference: <%= @reference %>
 <% end %></pre>
 <% end %>
-<div class="post-content">
-  <%= raw(@content_html) %>
-  <%= if @id != "index" do %>
-  <a href="/notes">Index</a>
-  <% end %>
-</div>
+  <div class="post-content">
+    <%= raw(@content_html) %>
+    <%= if @id != "index" do %>
+    <a href="/notes">Index</a>
+    <% end %>
+  </div>
+</article>
