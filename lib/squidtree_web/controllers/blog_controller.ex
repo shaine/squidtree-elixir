@@ -7,10 +7,10 @@ defmodule SquidtreeWeb.BlogController do
 
   def show(conn, params) do
     case params["slug"] |> Document.get_content() do
-      {:ok, blog_post, _} ->
+      {:ok, blog_post, _warnings, _raw_content} ->
         render(conn, "show.html", assigns_from_content(blog_post))
 
-      {:error, blog_post, warnings} ->
+      {:error, blog_post, warnings, _raw_content} ->
         Enum.each(warnings, &Logger.warn/1)
         render(conn, "show.html", assigns_from_content(blog_post))
 

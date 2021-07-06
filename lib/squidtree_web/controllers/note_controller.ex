@@ -13,10 +13,10 @@ defmodule SquidtreeWeb.NoteController do
          |> Document.get_content(
            post_directory: Path.join(:code.priv_dir(:squidtree), "note_contents")
          ) do
-      {:ok, note, _} ->
+      {:ok, note, _warnings, _raw_content} ->
         render(conn, "show.html", assigns_from_content(note))
 
-      {:error, note, warnings} ->
+      {:error, note, warnings, _raw_content} ->
         Enum.each(warnings, &Logger.warn/1)
         render(conn, "show.html", assigns_from_content(note))
 
