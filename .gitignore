@@ -41,3 +41,4 @@ squidtree.tar.gz
 # Ignore content dirs
 /priv/blog_contents
 /priv/note_contents
+/priv/reference_contents

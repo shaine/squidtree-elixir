@@ -1,0 +1,5 @@
+<%= if @title_html do %><h1><%= raw(@title_html) %></h1><% end %>
+<%= raw(@content_html) %>
+<%= if @id != "index" do %>
+<ul><li><a href="/notes">Index</a>.</li></ul>
+<% end %>

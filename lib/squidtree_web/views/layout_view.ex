@@ -3,12 +3,12 @@ defmodule SquidtreeWeb.LayoutView do
 
   alias Squidtree.DateTimeColor
 
-  def render(template, %{published_on: published_on} = assigns) do
-    render_for_date(template, Map.put(assigns, :color_date, published_on))
+  def render(template, %{published_at: published_at} = assigns) do
+    render_for_date(template, Map.put(assigns, :color_date, published_at))
   end
 
   def render(template, assigns) do
-    render_for_date(template, Map.put(assigns, :color_date, Date.utc_today()))
+    render_for_date(template, Map.put(assigns, :color_date, NaiveDateTime.utc_now()))
   end
 
   defp render_for_date(template, %{color_date: color_date} = assigns) do
@@ -21,7 +21,7 @@ defmodule SquidtreeWeb.LayoutView do
         _ -> page_title <> " | Squidtree"
       end
 
-    color = DateTimeColor.hsl_color_for_date(color_date)
+    color = DateTimeColor.hsl_color_for_date(NaiveDateTime.to_date(color_date))
 
     assigns = put_in(assigns, [:page_title], page_title)
     assigns = put_in(assigns, [:date_color], hex_color_string(color))

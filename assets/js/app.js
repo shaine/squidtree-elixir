@@ -6,6 +6,7 @@ import "../css/app.scss"
 import "../css/home.scss"
 import "../css/blog.scss"
 import "../css/note.scss"
+import "../css/reference.scss"
 import "../css/fouc-enable.scss"
 
 // webpack automatically bundles all modules in your

@@ -8,13 +8,15 @@ defmodule Squidtree.Application do
   def start(_type, _args) do
     children = [
       # Start the Telemetry supervisor
-      SquidtreeWeb.Telemetry,
+      # SquidtreeWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Squidtree.PubSub},
       # Start the Endpoint (http/https)
-      SquidtreeWeb.Endpoint
+      SquidtreeWeb.Endpoint,
       # Start a worker by calling: Squidtree.Worker.start_link(arg)
       # {Squidtree.Worker, arg}
+      {Squidtree.DocumentServer, name: Squidtree.DocumentServer},
+      Squidtree.DocumentIndexTask
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

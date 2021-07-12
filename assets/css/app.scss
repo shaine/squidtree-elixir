@@ -17,7 +17,7 @@ body {
   color: var(--primary-text-color);
   font-family: "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
   font-size: var(--primary-font-size);
-  margin: 0 15px 60px 15px;
+  margin: 0;
 }
 
 a:link, a:visited {
@@ -37,13 +37,34 @@ a:hover, a:active {
 
 main {
   margin: 0 auto;
-  padding-top: 50px;
+  padding: 50px 0 80px 0;
 }
 
 .page-header {
   background-color: var(--accent-background);
   padding: 25px 0;
   text-align: center;
+}
+
+.page-container {
+  min-height: 100vh;
+  position: relative;
+}
+
+.content-wrap {
+  margin: 0 15px 0 15px;
+  padding-bottom: 40px;
+}
+
+.page-footer {
+  background-color: #18181b;;
+  bottom: 0;
+  font-size: var(--small-font-size);
+  height: 40px;
+  line-height: 40px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
 }
 
 #logo {
@@ -57,7 +78,7 @@ main {
   #logo-circle {
     fill: var(--date-color) !important;
     opacity: 1 !important;
-    transition: var(--fade-time);
+    // transition: var(--fade-time);
   }
 
   .logo-suffix {
@@ -75,12 +96,8 @@ main {
     #logo-circle {
       fill: var(--primary-text-color) !important;
       opacity: 0.5 !important;
-      transition: var(--fade-time);
+      // transition: var(--fade-time);
     }
-  }
-
-  #logo-circle {
-    transition: var(--fade-time);
   }
 
   svg {
@@ -90,25 +107,26 @@ main {
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 2.5em;
+  line-height: 1em;
   margin: 0 0 30px 0;
 
   span, b {
-    color: var(--date-color);
+    color: var(--accent-text-color);
     transition: var(--fade-time);
   }
 }
 
 h2 {
   color: var(--accent-text-color);
-  font-size: 1.5em;
+  font-size: 1.7em;
   font-weight: bold;
   margin: 30px 0 10px;
 }
 
 h3 {
   color: var(--primary-text-color);
-  font-size: 1.5em;
+  font-size: 1.4em;
   font-weight: bold;
   margin: 20px 0 10px;
 }
@@ -166,6 +184,54 @@ pre, code {
   &.inline {
     padding: 2px;
   }
+
+  a:link, a:visited {
+    color: var(--primary-text-color);
+    transition: var(--fade-time);
+    text-decoration: underline;
+  }
+
+  a:hover, a:active {
+    color: var(--accent-text-color);
+    transition: var(--fade-time);
+  }
+}
+
+cite {
+  font-style: normal;
+
+  em {
+    font-size: 1em;
+
+    &.auto-em {
+      color: var(--primary-test-color);
+      font-style: normal;
+    }
+  }
+
+  blockquote {
+    color: var(--primary-text-color);
+    font-size: 1.2em;
+
+    a::before, a::after {
+      content: none !important;
+    }
+  }
+}
+
+ul, ul[class] {
+  line-height: 1.6em;
+  list-style: none;
+  margin: 0;
+  padding-left: 1em;
+
+  li::before {
+    color: var(--date-color);
+    content: "\25AA\00FE0E";
+    margin-left: -1em;
+    position: absolute;
+    width: 1em;
+  }
 }
 
 .post-meta {
@@ -177,12 +243,7 @@ pre, code {
   margin-bottom: 30px;
 }
 
-.post-content {
-  h1 {
-    font-size: 2em;
-    line-height: 1em;
-  }
-
+.post-content, .reference-notes-list, .reference-citation {
   a:link, a:visited {
     color: var(--date-color);
     text-decoration: underline;
@@ -193,28 +254,16 @@ pre, code {
     color: var(--accent-text-color);
     transition: var(--fade-time);
   }
-
-  ul {
-    line-height: 1.6em;
-    list-style: none;
-
-    li::before {
-      color: var(--date-color);
-      content: "\25AA\00FE0E";
-      margin-left: -1em;
-      position: absolute;
-      width: 1em;
-    }
-  }
 }
 
 @media (min-width: $breakpoint-desktop) {
-  body {
+  .content-wrap {
+    padding-bottom: 30px;
     margin: 0;
   }
 
   main {
-    padding: 50px;
+    padding: 50px 50px 80px 50px;
     width: 600px;
   }
 }

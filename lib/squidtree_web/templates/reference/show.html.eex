@@ -1,0 +1,24 @@
+<%= if @title != "" do %><pre class="note-metadata">
+id: <%= @id %>
+title: <%= raw(@title) %>
+date: <%= NaiveDateTime.to_date(@published_at) %></pre><% end %>
+
+<p><a href="/references">&laquo; References</a></p>
+
+<%= if @content_html != "" do %>
+<cite class="reference-citation">
+  <%= raw(@content_html) %>
+</cite>
+<% else %>
+<h1><%= @id %></h1>
+
+<p>This reference hasn't been documented yet, but there's plenty to learn from it.</p>
+<% end %>
+
+<aside class="reference-notes-list">
+  <h1>Referencing Notes</h1>
+
+  <ul class="reference-notes"><%= for note <- @notes do %>
+    <li><%= raw(note.title) %> <a href="/notes/<%= note.id %>"><%= note.id %></a></li><% end %>
+  </ul>
+</aside>

@@ -21,7 +21,7 @@ body.layout-home {
   }
 
   #home-nav {
-    margin-top: 50px;
+    margin-top: 60px;
 
     a:link, a:visited {
       color: var(--primary-text-color);
@@ -47,19 +47,28 @@ body.layout-home {
 
   nav {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 50% 50%;
 
     h1 {
       font-size: 20px;
       font-weight: bold;
+      line-height: 1.5;
       margin: 0;
+      padding-bottom: 3px;
     }
 
     ul, ol {
-      line-height: 1.6em;
-      list-style: none;
       margin: 0;
       padding: 0;
+
+      li::before {
+        content: none;
+      }
+
+      li {
+        line-height: 1.4em;
+        padding-bottom: 5px;
+      }
     }
 
     a:hover, a:active {
