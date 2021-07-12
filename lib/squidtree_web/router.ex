@@ -17,6 +17,7 @@ defmodule SquidtreeWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/about", PageController, :about
 
     get "/blog/:slug", BlogController, :show
     get "/notes/:id", NoteController, :show

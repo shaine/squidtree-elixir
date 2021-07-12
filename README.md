@@ -19,13 +19,12 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ### Next Up
 
+- Add modified date
 - Add search feature
   - Don't permit search until initial index is complete
-- Add About page
 - Add Blog page
 - Explain chosen color
 
 ### Longterm
 
-- Get layout name from view into layout container
 - Add background variations incl date color

@@ -1,0 +1,25 @@
+<article>
+  <h1>About Squidtree</h1>
+
+  <p>Squidtree is a place for Shaine Hatch to keep his words, in the form of <a href="/notes">Zettelkasten notes</a> and future blog content. Many of the ideas here come from other people's words as is captured in the <a href="/references">references</a>.</p>
+
+  <h2>The Author</h2>
+
+  <p>Shaine is a software engeering manager who's been in the field for 16 years. In his career, he has sought to learn across disciplines, which has taken him through many areas of the stack:</p>
+
+  <ul>
+    <li>Front end design and architecture</li>
+    <li>Backend service and ecosystem design</li>
+    <li>Engineering management and organization strategy</li>
+  </ul>
+
+  <h2>The Site</h2>
+
+  <h3>Shifting Color Scheme</h3>
+
+  <p>Squidtree uses the dates its content was posted on to determine its color scheme. The colors flow with the changing of the seasons, so winter dates are blue, summers are red, and the transitional seasons ride the rest of the color palette. Where content doesn't belong to a specific date, today's color scheme is used.</p>
+
+  <h3>Technology</h3>
+
+  <p>Squidtree is built atop an Elixir and Phoenix foundation, pulling in its content from markdown files scattered across a living network of knowledge accumulation.</p>
+</article>

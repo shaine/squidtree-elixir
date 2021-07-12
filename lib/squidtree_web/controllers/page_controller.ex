@@ -4,7 +4,7 @@ defmodule SquidtreeWeb.PageController do
   alias SquidtreeWeb.Router.Helpers
   alias Squidtree.DocumentServer
 
-  @home_description "A website where Shaine Hatch (humbly) commemorates himself."
+  @home_description "A place for Shaine Hatch to store his words."
 
   def index(conn, _params) do
     with {:ok, recent_notes} <- DocumentServer.get_most_recent_notes(3) do
@@ -14,5 +14,12 @@ defmodule SquidtreeWeb.PageController do
         recent_notes: recent_notes
       })
     end
+  end
+
+  def about(conn, _params) do
+    render(conn, "about.html", %{
+      page_description: @home_description,
+      layout_name: :page
+    })
   end
 end
