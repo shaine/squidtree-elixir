@@ -3,20 +3,43 @@ require Logger
 defmodule SquidtreeWeb.BlogController do
   use SquidtreeWeb, :controller
 
-  alias Squidtree.Document
+  alias Squidtree.DocumentServer
 
-  def show(conn, params) do
-    case params["slug"] |> Document.get_content() do
-      {:ok, blog_post, _warnings, _raw_content} ->
-        render(conn, "show.html", assigns_from_content(blog_post))
+  @blog_description "The bloggy archives of Shaine Hatch."
 
-      {:error, blog_post, warnings, _raw_content} ->
-        Enum.each(warnings, &Logger.warn/1)
-        render(conn, "show.html", assigns_from_content(blog_post))
+  def index(conn, _params) do
+    case DocumentServer.get_all_blog_posts() do
+      {:ok, blog_posts} ->
+        render(conn, "index.html", %{
+          layout_name: :blog,
+          base_path: "/blog/",
+          page_description: @blog_description,
+          blog_posts: blog_posts
+        })
 
       {:error, message} ->
         Logger.warn(message)
-        render(conn, SquidtreeWeb.ErrorView, "500.html")
+        conn
+        |> put_view(SquidtreeWeb.ErrorView)
+        |> render("500.html")
+    end
+  end
+
+  def show(conn, params) do
+    case params["slug"] |> DocumentServer.get_blog() do
+      {:ok, blog_post} ->
+        render(conn, "show.html", assigns_from_content(blog_post))
+
+      {:not_found} ->
+        conn
+        |> put_view(SquidtreeWeb.ErrorView)
+        |> render("404.html")
+
+      {:error, message} ->
+        Logger.warn(message)
+        conn
+        |> put_view(SquidtreeWeb.ErrorView)
+        |> render("500.html")
     end
   end
 

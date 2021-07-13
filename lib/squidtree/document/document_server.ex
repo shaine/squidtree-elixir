@@ -107,6 +107,14 @@ defmodule Squidtree.DocumentServer do
     {:ok, GenServer.call(__MODULE__, {:get_recent_references, count})}
   end
 
+  def get_most_recent_blog_posts(count \\ 3) do
+    {:ok, GenServer.call(__MODULE__, {:get_recent_blog_posts, count})}
+  end
+
+  def get_all_blog_posts do
+    {:ok, GenServer.call(__MODULE__, {:get_all_blog_posts})}
+  end
+
   # GenServer callbacks
 
   @impl true
@@ -173,6 +181,24 @@ defmodule Squidtree.DocumentServer do
     {
       :reply,
       all_cache_documents(:reference) |> sort_documents_by_date(:desc) |> Enum.take(count),
+      state
+    }
+  end
+
+  @impl true
+  def handle_call({:get_recent_blog_posts, count}, _from, state) do
+    {
+      :reply,
+      all_cache_documents(:blog) |> sort_documents_by_date(:desc) |> Enum.take(count),
+      state
+    }
+  end
+
+  @impl true
+  def handle_call({:get_all_blog_posts}, _from, state) do
+    {
+      :reply,
+      all_cache_documents(:blog) |> sort_documents_by_date(:desc),
       state
     }
   end

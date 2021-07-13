@@ -1,11 +1,11 @@
 <article>
   <h1>About Squidtree</h1>
 
-  <p>Squidtree is a place for Shaine Hatch to keep his words, in the form of <a href="/notes">Zettelkasten notes</a> and future blog content. Many of the ideas here come from other people's words as is captured in the <a href="/references">references</a>.</p>
+  <p>Squidtree is a place for Shaine Hatch to keep his words, in the form of <a href="/notes">Zettelkasten notes</a> and <a href="/blog">his blog</a>. Many of the ideas here come from other people's words as is captured in the <a href="/references">references</a>.</p>
 
   <h2>The Author</h2>
 
-  <p>Shaine is a software engeering manager who's been in the field for 16 years. In his career, he has sought to learn across disciplines, which has taken him through many areas of the stack:</p>
+  <p>Shaine is a software engeering manager who's been actively programming since 2002, professionally since 2006. In his career, he has sought to learn across disciplines, which has taken him through many areas of the stack:</p>
 
   <ul>
     <li>Front end design and architecture</li>
@@ -22,4 +22,6 @@
   <h3>Technology</h3>
 
   <p>Squidtree is built atop an Elixir and Phoenix foundation, pulling in its content from markdown files scattered across a living network of knowledge accumulation.</p>
+
+  <p>Learn more about Squidtree from its <a href="/blog/welcome-to-squidtree/">announcement post</a>.</p>
 </article>

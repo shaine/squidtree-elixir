@@ -1,2 +1,9 @@
 .layout-blog {
+  .post-meta {
+    color: var(--accent-text-color);
+
+    a {
+      text-decoration: underline;
+    }
+  }
 }

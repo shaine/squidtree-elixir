@@ -13,7 +13,6 @@ defmodule Squidtree.DocumentParser do
     |> set_title
     |> set_published_at
     |> set_title_slug
-    |> set_author
     |> set_references
     |> set_reference_slugs
     |> set_tags
@@ -63,13 +62,12 @@ defmodule Squidtree.DocumentParser do
 
   defp set_title_html({_, _, _, content_data} = token) do
     Map.get(content_data, "title", content_data[:slug])
-    # |> HtmlSanitizeEx.strip_tags()
     |> set_field(token, :title_html)
   end
 
   defp set_title({_, _, _, content_data} = token) do
     Map.get(content_data, "title", content_data[:slug])
-    # |> HtmlSanitizeEx.strip_tags()
+    |> HtmlSanitizeEx.strip_tags()
     |> set_field(token, :title)
   end
 
@@ -104,9 +102,6 @@ defmodule Squidtree.DocumentParser do
     |> Slug.slugify()
     |> set_field(token, :title_slug)
   end
-
-  defp set_author({_, _, _, %{"author" => author}} = token), do: set_field(author, token, :author)
-  defp set_author(token), do: set_field(nil, token, :author)
 
   defp set_references({_, _, _, %{"citation" => reference}} = token) when is_binary(reference) do
     reference
@@ -179,7 +174,9 @@ defmodule Squidtree.DocumentParser do
 
   defp set_content_html({_, _, _, %{content_md: content_md}} = token) do
     case Earmark.as_html(content_md |> content_pre_process, wikilinks: true, escape: false) do
-      {:ok, content_html, _warnings} ->
+      {:ok, content_html, warnings} ->
+        Enum.each(warnings, &Logger.warn/1)
+
         content_post_process(content_html)
         |> set_field(token, :content_html)
 
@@ -188,6 +185,8 @@ defmodule Squidtree.DocumentParser do
     end
   end
 
+  defp set_content_preview({_, _, _, %{"description" => description}} = token),
+    do: set_field(description, token, :content_preview)
   defp set_content_preview({_, _, _, %{content_md: content_md}} = token) do
     content_md
     # Split by <hr>s

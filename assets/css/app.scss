@@ -1,5 +1,28 @@
 $breakpoint-desktop: 700px;
 
+@mixin list-link {
+  a:link, a:visited {
+    color: var(--primary-text-color);
+    transition: var(--fade-time);
+    text-decoration: none;
+
+    span {
+      color: var(--accent-text-color);
+      transition: var(--fade-time);
+    }
+  }
+
+  a:hover, a:active {
+    color: var(--accent-text-color);
+    transition: var(--fade-time);
+
+    span {
+      color: var(--date-color);
+      transition: var(--fade-time);
+    }
+  }
+}
+
 :root {
   // --primary-background: #3C3C41;
   --primary-background: var(--accent-background);
@@ -107,6 +130,8 @@ main {
 }
 
 h1 {
+  @include list-link;
+
   font-size: 2.5em;
   line-height: 1em;
   margin: 0 0 30px 0;
@@ -220,9 +245,11 @@ cite {
 }
 
 ul, ul[class] {
+  @include list-link;
+
   line-height: 1.6em;
   list-style: none;
-  margin: 0;
+  margin: 0 0 15px 0;
   padding-left: 1em;
 
   li::before {
@@ -266,4 +293,8 @@ ul, ul[class] {
     padding: 50px 50px 80px 50px;
     width: 600px;
   }
+}
+
+.back-link {
+  margin-top: 30px;
 }

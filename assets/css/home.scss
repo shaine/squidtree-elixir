@@ -22,27 +22,6 @@ body.layout-home {
 
   #home-nav {
     margin-top: 60px;
-
-    a:link, a:visited {
-      color: var(--primary-text-color);
-      transition: var(--fade-time);
-      text-decoration: none;
-
-      span {
-        color: var(--accent-text-color);
-        transition: var(--fade-time);
-      }
-    }
-
-    a:hover, a:active {
-      color: var(--accent-text-color);
-      transition: var(--fade-time);
-
-      span {
-        color: var(--date-color);
-        transition: var(--fade-time);
-      }
-    }
   }
 
   nav {
@@ -68,6 +47,10 @@ body.layout-home {
       li {
         line-height: 1.4em;
         padding-bottom: 5px;
+      }
+
+      &.about-links-list, &.note-links-list {
+        margin-bottom: 30px;
       }
     }
 

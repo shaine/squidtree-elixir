@@ -19,12 +19,17 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ### Next Up
 
+- Show blog dates on index
+- Add slug and date redirects
+- Google analytics
 - Add modified date
+- Sitemap
 - Add search feature
   - Don't permit search until initial index is complete
-- Add Blog page
 - Explain chosen color
 
 ### Longterm
 
 - Add background variations incl date color
+- Blog tags
+- Add note link preview on hover

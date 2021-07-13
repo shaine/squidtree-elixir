@@ -1,5 +1,5 @@
 <h1>References</h1>
 
 <ul><%= for reference <- @references do %>
-  <li><a href="<%= reference.id %>"><%= raw(reference.title) %></a></li>
+  <li><a href="<%= reference.id %>"><%= raw(reference.title_html) %></a></li>
 <% end %></ul>

@@ -1,11 +1,13 @@
 <div class="post-header">
   <h1><%= raw(@title_html) %></h1>
 
-  <p class="post-author-line post-meta"><%= @author %> on <time><%= date_format(@published_at) %></time></p>
+  <p class="post-author-line post-meta"><a href="/about" rel="author">Shaine Hatch</a> on <time pubdate datetime="<%= date_format(@published_at) %>"><%= date_format(@published_at) %></time></p>
 
   <p class="post-tags-line post-meta"><%= for {tag, i} <- Enum.with_index(@tags) do %>
     <a href="/blog/search?tag=<%= tag.slug %>"><%= tag.name %></a><%= unless last_item?(i, @tags), do: ", " %>
   <% end %></p>
+
+  <p class="back-link"><a href="/blog">&laquo; Blog</a></p>
 </div>
 
 <div class="post-content">

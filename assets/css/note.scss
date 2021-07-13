@@ -1,4 +1,4 @@
-.post-content, .reference-notes-list, .reference-citation {
+.layout-note .post-content, .layout-reference .reference-content {
   a {
     transition: var(--fade-time);
   }
@@ -13,6 +13,14 @@
     color: var(--date-color);
     content: "]]";
     transition: var(--fade-time);
+  }
+
+  a:link, a:visited {
+    color: var(--date-color);
+  }
+
+  a:active, a:hover {
+    color: var(--accent-text-color);
   }
 
   a:active, a:hover {

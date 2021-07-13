@@ -3,22 +3,23 @@ id: <%= @id %>
 title: <%= raw(@title) %>
 date: <%= NaiveDateTime.to_date(@published_at) %></pre><% end %>
 
-<p><a href="/references">&laquo; References</a></p>
+<p class="back-link"><a href="/references">&laquo; References</a></p>
 
-<%= if @content_html != "" do %>
-<cite class="reference-citation">
-  <%= raw(@content_html) %>
-</cite>
-<% else %>
-<h1><%= @id %></h1>
+<div class="reference-content">
+  <h1><%= raw(@title_html) %></h1>
+  <%= if @content_html != "" do %>
+  <cite class="reference-citation">
+    <%= raw(@content_html) %>
+  </cite>
+  <% else %>
+  <p>This reference hasn't been documented yet, but there's plenty to learn from it.</p>
+  <% end %>
 
-<p>This reference hasn't been documented yet, but there's plenty to learn from it.</p>
-<% end %>
+  <aside class="reference-notes-list">
+    <h1>Referencing Notes</h1>
 
-<aside class="reference-notes-list">
-  <h1>Referencing Notes</h1>
-
-  <ul class="reference-notes"><%= for note <- @notes do %>
-    <li><%= raw(note.title) %> <a href="/notes/<%= note.id %>"><%= note.id %></a></li><% end %>
-  </ul>
-</aside>
+    <ul class="reference-notes"><%= for note <- @notes do %>
+      <li><%= raw(note.title_html) %> <a href="/notes/<%= note.id %>"><%= note.id %></a></li><% end %>
+    </ul>
+  </aside>
+</div>
