@@ -48,6 +48,16 @@
         display: none;
       }
     </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TK2PRC8NHP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TK2PRC8NHP');
+    </script>
   </head>
 
   <body class="layout-<%= assigns[:layout_name] %>">

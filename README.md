@@ -21,7 +21,6 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 - Show blog dates on index
 - Add slug and date redirects
-- Google analytics
 - Add modified date
 - Sitemap
 - Add search feature
