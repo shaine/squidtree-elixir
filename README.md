@@ -19,11 +19,10 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ### Next Up
 
-- Create cache reset endpoint
 - Show blog dates on index
 - Add slug and date redirects
-- Add modified date
 - Sitemap
+- Create cache reset endpoint
 - Add search feature
   - Don't permit search until initial index is complete
 - Explain chosen color

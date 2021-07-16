@@ -25,4 +25,8 @@ defmodule SquidtreeWeb.PageController do
       layout_name: :page
     })
   end
+
+  def sitemap(conn, _params) do
+    render(conn, "sitemap.xml")
+  end
 end
