@@ -50,16 +50,17 @@ defmodule Squidtree.DocumentServer do
 
       _ ->
         IO.puts("Cache miss #{type} #{slug}")
-        cache_from_file(slug, modified_at: modified_at, type: type)
+        cache_from_file(slug, type: type, modified_at: modified_at)
     end
   end
 
-  defp cache_from_file(slug, modified_at: modified_at, type: type) do
-    with {:ok, document} <- fetch_from_file(slug, type: type),
+  defp cache_from_file(slug, type: type, modified_at: modified_at) do
+    with {:ok, %{modified_at: foobar} = document} <- fetch_from_file(slug, type: type),
          _ <- set_cache(slug, type, %{modified_at: modified_at, document: document}) do
+      IO.puts("Modified at #{foobar}")
       {:ok, document}
     else
-      err -> err
+      err -> IO.puts(err)
     end
   end
 
@@ -90,6 +91,8 @@ defmodule Squidtree.DocumentServer do
   defp destroy_cache(slug, type) do
     GenServer.call(__MODULE__, {:destroy_cache, type, slug})
   end
+
+  def destroy_cache, do: GenServer.call(__MODULE__, {:destroy_cache})
 
   def find_all_by_reference(reference_slug) do
     {:ok, GenServer.call(__MODULE__, {:get_cache_by_reference, reference_slug})}
@@ -140,6 +143,15 @@ defmodule Squidtree.DocumentServer do
     {
       :reply,
       DocumentType.table_name_for_type(type) |> :ets.delete(slug),
+      state
+    }
+  end
+
+  def handle_call({:destroy_cache}, _from, state) do
+    {
+      :reply,
+      DocumentType.types()
+      |> Enum.each(fn type -> DocumentType.table_name_for_type(type) |> :ets.delete(type) end),
       state
     }
   end

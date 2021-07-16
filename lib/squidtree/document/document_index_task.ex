@@ -29,6 +29,8 @@ defmodule Squidtree.DocumentIndexTask do
   defp perform_indexing do
     IO.puts("Starting DocumentIndexTask")
 
+    DocumentServer.destroy_cache()
+
     DocumentType.types()
     |> Enum.each(fn type ->
       index_type(type)

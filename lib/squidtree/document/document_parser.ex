@@ -21,19 +21,21 @@ defmodule Squidtree.DocumentParser do
     |> return_token
   end
 
-  defp raw_markdown_from_file(file_description) do
+  defp raw_markdown_from_file(%{content: content, slug: slug, modified_at: modified_at}) do
     with [yaml | body_segments] <-
-           file_description.content
+           content
            |> String.split("---\n", trim: true)
            |> ensure_metadata,
          {:ok, metadata} <-
            patch_yaml(yaml)
            |> YamlElixir.read_from_string(),
-         metadata <- Map.put(metadata, :slug, file_description.slug),
+         metadata <- Map.put(metadata, :slug, slug),
          content_md <-
            body_segments
            |> Enum.join("---\n"),
-         metadata <- Map.put(metadata, :content_md, content_md) do
+         metadata <-
+           Map.put(metadata, :content_md, content_md)
+           |> Map.put(:modified_at, modified_at) do
       metadata
     end
   end
@@ -49,8 +51,8 @@ defmodule Squidtree.DocumentParser do
     |> String.replace(~r/^(.*?:) (.*)$/m, "\\1 \"\\2\"")
   end
 
-  defp document_token(%{slug: slug} = content_data),
-    do: {:ok, %Document{id: slug}, [], content_data}
+  defp document_token(%{slug: slug, modified_at: modified_at} = content_data),
+    do: {:ok, %Document{id: slug, modified_at: modified_at}, [], content_data}
 
   defp set_field(value, {status, document, warnings, content_data}, key) do
     {status, %{document | key => value}, warnings, content_data}
@@ -187,6 +189,7 @@ defmodule Squidtree.DocumentParser do
 
   defp set_content_preview({_, _, _, %{"description" => description}} = token),
     do: set_field(description, token, :content_preview)
+
   defp set_content_preview({_, _, _, %{content_md: content_md}} = token) do
     content_md
     # Split by <hr>s

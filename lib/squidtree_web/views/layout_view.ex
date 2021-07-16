@@ -27,6 +27,7 @@ defmodule SquidtreeWeb.LayoutView do
     assigns = put_in(assigns, [:date_color], hex_color_string(color))
     assigns = put_in(assigns, [:date_color_decimals], dec_color_list_string(color))
     assigns = put_in(assigns, [:layout_name], layout_name)
+    assigns = put_in(assigns, [:year], DateTime.utc_now().year)
 
     render_template(template, assigns)
   end

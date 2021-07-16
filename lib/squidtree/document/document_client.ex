@@ -17,8 +17,9 @@ defmodule Squidtree.DocumentFileClient do
   end
 
   def fetch_raw_markdown(slug, type: type) do
-    with {:ok, content} <- path_to_post_for_slug(slug, type) |> File.read() do
-      {:ok, %{slug: slug, type: type, content: content}}
+    with {:ok, content} <- path_to_post_for_slug(slug, type) |> File.read(),
+         {:ok, %{modified_at: modified_at}} <- fetch_file_metadata(slug, type: type) do
+      {:ok, %{slug: slug, type: type, content: content, modified_at: modified_at}}
     end
   end
 

@@ -9,7 +9,7 @@ defmodule SquidtreeWeb.PageController do
 
   def index(conn, _params) do
     with {:ok, recent_notes} <- DocumentServer.get_most_recent_notes(3),
-    {:ok, recent_blog_posts} <- DocumentServer.get_most_recent_blog_posts(3) do
+         {:ok, recent_blog_posts} <- DocumentServer.get_most_recent_blog_posts(3) do
       render(conn, "home.html", %{
         page_description: @home_description,
         layout_name: :home,

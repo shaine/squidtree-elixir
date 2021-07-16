@@ -16,6 +16,7 @@ defmodule Squidtree.Document do
             reference: "",
             reference_slugs: [],
             published_at: nil,
+            modified_at: nil,
             tags: [],
             title_html: "",
             content_html: "",

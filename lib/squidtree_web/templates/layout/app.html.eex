@@ -81,7 +81,7 @@
       </div>
 
       <footer class="page-footer">
-        &copy; 2021 Shaine Hatch. All rights reserved.
+        &copy; <%= @year %> Shaine Hatch. All rights reserved.
       </footer>
     </div>
   </body>

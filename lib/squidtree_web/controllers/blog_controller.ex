@@ -19,6 +19,7 @@ defmodule SquidtreeWeb.BlogController do
 
       {:error, message} ->
         Logger.warn(message)
+
         conn
         |> put_view(SquidtreeWeb.ErrorView)
         |> render("500.html")
@@ -37,6 +38,7 @@ defmodule SquidtreeWeb.BlogController do
 
       {:error, message} ->
         Logger.warn(message)
+
         conn
         |> put_view(SquidtreeWeb.ErrorView)
         |> render("500.html")
