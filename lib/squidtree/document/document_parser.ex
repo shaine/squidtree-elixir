@@ -22,7 +22,12 @@ defmodule Squidtree.DocumentParser do
     |> return_token
   end
 
-  defp raw_markdown_from_file(%{content: content, slug: slug, modified_at: modified_at, type: type}) do
+  defp raw_markdown_from_file(%{
+         content: content,
+         slug: slug,
+         modified_at: modified_at,
+         type: type
+       }) do
     with [yaml | body_segments] <-
            content
            |> String.split("---\n", trim: true)
@@ -220,15 +225,19 @@ defmodule Squidtree.DocumentParser do
     |> Enum.join("/")
   end
 
-  defp set_path ({_status, %{published_at: published_at, id: id}, _warnings, %{type: :blog}} = token) do
+  defp set_path(
+         {_status, %{published_at: published_at, id: id}, _warnings, %{type: :blog}} = token
+       ) do
     "/blog/#{format_date(published_at)}/#{id}"
     |> set_field(token, :path)
   end
-  defp set_path ({_status, %{title_slug: title_slug, id: id}, _warnings, %{type: :note}} = token) do
+
+  defp set_path({_status, %{title_slug: title_slug, id: id}, _warnings, %{type: :note}} = token) do
     "/notes/#{title_slug}/#{id}"
     |> set_field(token, :path)
   end
-  defp set_path ({_status, %{id: id}, _warnings, %{type: :reference}} = token) do
+
+  defp set_path({_status, %{id: id}, _warnings, %{type: :reference}} = token) do
     "/references/#{id}"
     |> set_field(token, :path)
   end

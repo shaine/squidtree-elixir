@@ -81,7 +81,7 @@
       </div>
 
       <footer class="page-footer">
-        &copy; <%= @year %> Shaine Hatch. All rights reserved.
+        &copy; <%= @year %> Shaine Hatch. All rights reserved. <span class="footer-links"><a href="/sitemap">Sitemap</a></span>
       </footer>
     </div>
   </body>

@@ -1,0 +1,33 @@
+<section>
+  <h1>Sitemap</h1>
+
+  <h2>Pages</h2>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/references">References</a></li>
+    <li><a href="/sitemap">Sitemap</a></li>
+  </ul>
+
+  <h2>References</h2>
+  <ul>
+<%= for reference <- @references do %>
+    <li><a href="<%= reference.path %>"><%= raw(reference.title_html) %></a></li>
+<% end %>
+  </ul>
+
+  <h2>Blog</h2>
+  <ul>
+<%= for blog_post <- @blog_posts do %>
+    <li><a href="<%= blog_post.path %>"><%= raw(blog_post.title_html) %></a></li>
+<% end %>
+  </ul>
+
+  <h2>Notes</h2>
+  <ul>
+<%= for note <- @notes do %>
+    <li><a href="<%= note.path %>"><%= raw(note.title_html) %></a></li>
+<% end %>
+  </ul>
+</section>

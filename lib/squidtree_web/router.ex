@@ -2,7 +2,7 @@ defmodule SquidtreeWeb.Router do
   use SquidtreeWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["html", "xml"]
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
@@ -18,7 +18,8 @@ defmodule SquidtreeWeb.Router do
 
     get "/", PageController, :index
     get "/about", PageController, :about
-    # get "sitemap.xml", PageController, :sitemap
+    get "sitemap.:format", PageController, :sitemap
+    get "sitemap", PageController, :sitemap
 
     get "/blog", BlogController, :index
     get "/blog/:slug", BlogController, :show

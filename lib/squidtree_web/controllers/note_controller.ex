@@ -13,7 +13,7 @@ defmodule SquidtreeWeb.NoteController do
          {:ok, note} <- DocumentServer.get_note("index") do
       render(
         conn,
-        "index.html",
+        :index,
         assigns_from_content(note, %{
           recent_notes: recent_notes,
           recent_references: recent_references,
@@ -24,22 +24,24 @@ defmodule SquidtreeWeb.NoteController do
       _ ->
         conn
         |> put_view(SquidtreeWeb.ErrorView)
-        |> render("500.html")
+        |> render(:"500")
     end
   end
 
   def show(conn, %{"slug" => slug, "id" => id}) do
     show(conn, slug: slug, id: id)
   end
+
   def show(conn, %{"id" => id}) do
     show(conn, slug: nil, id: id)
   end
+
   def show(conn, slug: slug, id: id) do
     case DocumentServer.get_note(id) do
       {:ok, %{path: path} = note} ->
         if "/notes/#{slug}/#{id}" == path do
-          conn |>
-          render("show.html", assigns_from_content(note))
+          conn
+          |> render(:show, assigns_from_content(note))
         else
           conn
           |> put_status(301)
@@ -49,14 +51,14 @@ defmodule SquidtreeWeb.NoteController do
       {:not_found} ->
         conn
         |> put_view(SquidtreeWeb.ErrorView)
-        |> render("404.html")
+        |> render(:"404")
 
       {:error, message} ->
         Logger.warn(message)
 
         conn
         |> put_view(SquidtreeWeb.ErrorView)
-        |> render("500.html")
+        |> render(:"500")
     end
   end
 

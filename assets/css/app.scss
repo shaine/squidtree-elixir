@@ -88,6 +88,20 @@ main {
   position: absolute;
   text-align: center;
   width: 100%;
+
+  .footer-links {
+    display: inline-block;
+    margin-left: 10px;
+  }
+
+  a:visited, a:link {
+    color: var(--primary-text-color);
+    font-weight: bold;
+  }
+
+  a:active, a:hover {
+    color: var(--accent-text-color);
+  }
 }
 
 #logo {

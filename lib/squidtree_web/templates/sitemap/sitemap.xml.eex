@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.squidtree.com/</loc>
+  </url>
+
+  <url>
+    <loc>https://www.squidtree.com/about</loc>
+  </url>
+
+  <url>
+    <loc>https://www.squidtree.com/blog</loc>
+  </url>
+
+  <url>
+    <loc>https://www.squidtree.com/references</loc>
+  </url>
+
+  <url>
+    <loc>https://www.squidtree.com/sitemap</loc>
+  </url>
+
+<%= for reference <- @references do %>
+  <url>
+    <loc>https://www.squidtree.com<%= reference.path %></loc>
+  </url>
+<% end %>
+<%= for blog_post <- @blog_posts do %>
+  <url>
+    <loc>https://www.squidtree.com<%= blog_post.path %></loc>
+  </url>
+<% end %>
+<%= for note <- @notes do %>
+  <url>
+    <loc>https://www.squidtree.com<%= note.path %></loc>
+  </url>
+<% end %>
+</urlset>

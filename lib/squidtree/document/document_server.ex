@@ -106,6 +106,10 @@ defmodule Squidtree.DocumentServer do
     {:ok, GenServer.call(__MODULE__, {:get_recent_notes, count})}
   end
 
+  def get_all_notes do
+    {:ok, GenServer.call(__MODULE__, {:get_all_notes})}
+  end
+
   def get_most_recent_references(count \\ 5) do
     {:ok, GenServer.call(__MODULE__, {:get_recent_references, count})}
   end
@@ -184,6 +188,17 @@ defmodule Squidtree.DocumentServer do
       |> sort_documents_by_date(:desc)
       |> exclude_index
       |> Enum.take(count),
+      state
+    }
+  end
+
+  @impl true
+  def handle_call({:get_all_notes}, _from, state) do
+    {
+      :reply,
+      all_cache_documents(:note)
+      |> sort_documents_by_date(:desc)
+      |> exclude_index,
       state
     }
   end

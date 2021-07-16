@@ -7,7 +7,7 @@ defmodule SquidtreeWeb.ReferenceController do
 
   def index(conn, _params) do
     with {:ok, references} <- DocumentServer.get_all_references() do
-      render(conn, "index.html", %{
+      render(conn, :index, %{
         references: references,
         layout_name: :reference,
         base_path: "/references/",
@@ -20,7 +20,7 @@ defmodule SquidtreeWeb.ReferenceController do
     with slug <- params["slug"],
          {:ok, notes} <- DocumentServer.find_all_by_reference(slug),
          {:ok, reference} <- DocumentServer.get_reference(slug) do
-      render(conn, "show.html", assigns_from_content(reference, notes))
+      render(conn, :show, assigns_from_content(reference, notes))
     else
       {:not_found} ->
         missing_reference(conn, params)
@@ -30,7 +30,7 @@ defmodule SquidtreeWeb.ReferenceController do
 
         conn
         |> put_view(SquidtreeWeb.ErrorView)
-        |> render("500.html")
+        |> render(:"500")
     end
   end
 
@@ -39,11 +39,11 @@ defmodule SquidtreeWeb.ReferenceController do
          # TODO Calling this twice seems suboptimal
          {:ok, notes} <- DocumentServer.find_all_by_reference(slug) do
       if length(notes) > 0 do
-        render(conn, "show.html", assigns_from_content(placeholder_reference(slug), notes))
+        render(conn, :show, assigns_from_content(placeholder_reference(slug), notes))
       else
         conn
         |> put_view(SquidtreeWeb.ErrorView)
-        |> render("404.html")
+        |> render(:"404")
       end
     end
   end
