@@ -28,10 +28,23 @@ defmodule SquidtreeWeb.NoteController do
     end
   end
 
-  def show(conn, params) do
-    case params["id"] |> DocumentServer.get_note() do
-      {:ok, note} ->
-        render(conn, "show.html", assigns_from_content(note))
+  def show(conn, %{"slug" => slug, "id" => id}) do
+    show(conn, slug: slug, id: id)
+  end
+  def show(conn, %{"id" => id}) do
+    show(conn, slug: nil, id: id)
+  end
+  def show(conn, slug: slug, id: id) do
+    case DocumentServer.get_note(id) do
+      {:ok, %{path: path} = note} ->
+        if "/notes/#{slug}/#{id}" == path do
+          conn |>
+          render("show.html", assigns_from_content(note))
+        else
+          conn
+          |> put_status(301)
+          |> redirect(to: path)
+        end
 
       {:not_found} ->
         conn

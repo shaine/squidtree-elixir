@@ -20,5 +20,6 @@ defmodule Squidtree.Document do
             tags: [],
             title_html: "",
             content_html: "",
-            content_preview: ""
+            content_preview: "",
+            path: ""
 end

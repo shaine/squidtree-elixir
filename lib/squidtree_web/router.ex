@@ -22,7 +22,9 @@ defmodule SquidtreeWeb.Router do
 
     get "/blog", BlogController, :index
     get "/blog/:slug", BlogController, :show
+    get "/blog/:year/:month/:day/:slug", BlogController, :show
     get "/notes/:id", NoteController, :show
+    get "/notes/:slug/:id", NoteController, :show
     get "/notes", NoteController, :index
     get "/references", ReferenceController, :index
     get "/references/:slug", ReferenceController, :show

@@ -1,5 +1,5 @@
 <h1>Blog</h1>
 
 <ul><%= for blog_post <- @blog_posts do %>
-  <li><a href="<%= blog_post.id %>"><%= raw(blog_post.title_html) %></a></li>
+  <li><a href="<%= blog_post.path %>"><%= raw(blog_post.title_html) %></a></li>
 <% end %></ul>

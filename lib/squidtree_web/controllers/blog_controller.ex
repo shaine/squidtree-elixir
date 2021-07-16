@@ -10,7 +10,8 @@ defmodule SquidtreeWeb.BlogController do
   def index(conn, _params) do
     case DocumentServer.get_all_blog_posts() do
       {:ok, blog_posts} ->
-        render(conn, "index.html", %{
+        conn
+        |> render("index.html", %{
           layout_name: :blog,
           base_path: "/blog/",
           page_description: @blog_description,
@@ -26,10 +27,23 @@ defmodule SquidtreeWeb.BlogController do
     end
   end
 
-  def show(conn, params) do
-    case params["slug"] |> DocumentServer.get_blog() do
-      {:ok, blog_post} ->
-        render(conn, "show.html", assigns_from_content(blog_post))
+  def show(conn, %{"year" => year, "month" => month, "day" => day, "slug" => slug}) do
+    show(conn, slug: slug, date_slug: "#{year}/#{month}/#{day}")
+  end
+  def show(conn, %{"slug" => slug}) do
+    show(conn, slug: slug, date_slug: nil)
+  end
+  def show(conn, slug: slug, date_slug: date_slug) do
+    case DocumentServer.get_blog(slug) do
+      {:ok, %{path: path} = blog_post} ->
+        if "/blog/#{date_slug}/#{slug}" == path do
+          conn
+          |> render("show.html", assigns_from_content(blog_post))
+        else
+          conn
+          |> put_status(301)
+          |> redirect(to: path)
+        end
 
       {:not_found} ->
         conn
