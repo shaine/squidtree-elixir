@@ -175,7 +175,7 @@ defmodule Squidtree.DocumentServer do
   def handle_call({:get_all_references}, _from, state) do
     {
       :reply,
-      all_cache_documents(:reference) |> sort_documents_by_date(:asc),
+      all_cache_documents(:reference) |> sort_documents_by_date(:desc),
       state
     }
   end

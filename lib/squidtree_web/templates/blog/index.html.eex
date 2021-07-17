@@ -1,5 +1,33 @@
 <h1>Blog</h1>
 
-<ul><%= for blog_post <- @blog_posts do %>
+<% generate_content = fn(blog_post, i, %{month: month, year: year, content: content}) -> %>
+  <%= content %>
+  <%= if blog_post.published_at.year != year do %>
+    <%# Previous year ended so close the UL before continuing, unless this is the first post %>
+    <%= if i != 0 do %></ul> <% end %>
+
+    <h2><%= blog_post.published_at.year %></h2>
+  <% end %>
+
+  <%# Gotta check month and year to see if this is a differnt month from the last %>
+  <%= if {blog_post.published_at.year, blog_post.published_at.month} != month do %>
+    <%# Previous month ended, gotta close open ULs but only if a year change hasn't already %>
+    <%= if blog_post.published_at.year == year do %></ul> <% end %>
+
+    <h3><%= month_format(blog_post.published_at) %></h3>
+
+    <ul>
+  <% end %>
+
   <li><a href="<%= blog_post.path %>"><%= raw(blog_post.title_html) %></a></li>
-<% end %></ul>
+<% end %>
+
+<%=
+Enum.reduce(Enum.with_index(@blog_posts), %{month: 0, year: 0, content: ""}, fn({blog_post, i}, accum) ->
+  %{
+    year: blog_post.published_at.year,
+    month: {blog_post.published_at.year,
+    blog_post.published_at.month},
+    content: generate_content.(blog_post, i, accum)
+  }
+end ).content %>

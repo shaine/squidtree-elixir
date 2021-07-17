@@ -1,5 +1,33 @@
 <h1>References</h1>
 
-<ul><%= for reference <- @references do %>
+<% generate_content = fn(reference, i, %{month: month, year: year, content: content}) -> %>
+  <%= content %>
+  <%= if reference.published_at.year != year do %>
+    <%# Previous year ended so close the UL before continuing, unless this is the first post %>
+    <%= if i != 0 do %></ul> <% end %>
+
+    <h2><%= reference.published_at.year %></h2>
+  <% end %>
+
+  <%# Gotta check month and year to see if this is a differnt month from the last %>
+  <%= if {reference.published_at.year, reference.published_at.month} != month do %>
+    <%# Previous month ended, gotta close open ULs but only if a year change hasn't already %>
+    <%= if reference.published_at.year == year do %></ul> <% end %>
+
+    <h3><%= month_format(reference.published_at) %></h3>
+
+    <ul>
+  <% end %>
+
   <li><a href="<%= reference.path %>"><%= raw(reference.title_html) %></a></li>
-<% end %></ul>
+<% end %>
+
+<%=
+Enum.reduce(Enum.with_index(@references), %{month: 0, year: 0, content: ""}, fn({reference, i}, accum) ->
+  %{
+    year: reference.published_at.year,
+    month: {reference.published_at.year,
+    reference.published_at.month},
+    content: generate_content.(reference, i, accum)
+  }
+end ).content %>

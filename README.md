@@ -19,11 +19,8 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ### Next Up
 
-- Sitemap
-- Show blog dates on index
 - Create cache reset endpoint
 - Add search feature
-  - Don't permit search until initial index is complete
 - Explain chosen color
 
 ### Longterm

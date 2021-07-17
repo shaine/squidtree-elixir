@@ -30,9 +30,9 @@ defmodule SquidtreeWeb.PageController do
   end
 
   def sitemap(conn, format: format) do
-    with {:ok, blog_posts} <- DocumentServer.get_all_blog_posts,
-         {:ok, references} <- DocumentServer.get_all_references,
-         {:ok, notes} <- DocumentServer.get_all_notes do
+    with {:ok, blog_posts} <- DocumentServer.get_all_blog_posts(),
+         {:ok, references} <- DocumentServer.get_all_references(),
+         {:ok, notes} <- DocumentServer.get_all_notes() do
       conn
       |> put_view(SquidtreeWeb.SitemapView)
       |> render("sitemap.#{format}", %{
@@ -45,6 +45,7 @@ defmodule SquidtreeWeb.PageController do
     else
       err ->
         Logger.warning(err)
+
         conn
         |> put_view(SquidtreeWeb.ErrorView)
         |> render(:"500")

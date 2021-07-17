@@ -8,6 +8,10 @@ defmodule SquidtreeWeb.BlogView do
 
   def date_format(date), do: date
 
+  def month_format(%NaiveDateTime{} = date) do
+    with {:ok, formatted_date} <- Timex.format(date, "{Mfull}"), do: formatted_date
+  end
+
   def last_item?(index, list) do
     index == length(list) - 1
   end
