@@ -1,3 +1,4 @@
+$nav-spacing: 15px;
 body.layout-home {
   background-color: var(--accent-background);
   text-align: center;
@@ -18,6 +19,7 @@ body.layout-home {
 
   .introduction {
     font-size: 14px;
+    font-weight: normal;
   }
 
   #home-nav {
@@ -33,12 +35,22 @@ body.layout-home {
       font-weight: bold;
       line-height: 1.5;
       margin: 0;
+      margin-top: $nav-spacing;
       padding-bottom: 3px;
+
+      &:first-child {
+        margin-top: 0;
+      }
     }
 
     ul, ol {
       margin: 0;
+      margin-bottom: $nav-spacing;
       padding: 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
 
       li::before {
         content: none;
@@ -47,10 +59,6 @@ body.layout-home {
       li {
         line-height: 1.4em;
         padding-bottom: 5px;
-      }
-
-      &.about-links-list, &.note-links-list {
-        margin-bottom: 30px;
       }
     }
 

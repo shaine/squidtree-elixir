@@ -102,8 +102,8 @@ defmodule Squidtree.DocumentServer do
     {:ok, GenServer.call(__MODULE__, {:get_all_references})}
   end
 
-  def get_most_recent_notes(count \\ 5) do
-    {:ok, GenServer.call(__MODULE__, {:get_recent_notes, count})}
+  def get_most_recent_notes(count \\ 5, time_field_name \\ :published_at) do
+    {:ok, GenServer.call(__MODULE__, {:get_recent_notes, count, time_field_name})}
   end
 
   def get_all_notes do
@@ -181,11 +181,15 @@ defmodule Squidtree.DocumentServer do
   end
 
   @impl true
-  def handle_call({:get_recent_notes, count}, _from, state) do
+  def handle_call({:get_recent_notes, count}, from, state), do:
+    handle_call({:get_recent_notes, count, :published_at}, from, state)
+
+  @impl true
+  def handle_call({:get_recent_notes, count, time_field_name}, _from, state) do
     {
       :reply,
       all_cache_documents(:note)
-      |> sort_documents_by_date(:desc)
+      |> sort_documents_by_date(:desc, time_field_name)
       |> exclude_index
       |> Enum.take(count),
       state
@@ -242,8 +246,8 @@ defmodule Squidtree.DocumentServer do
     end)
   end
 
-  defp sort_documents_by_date(documents, sort_direction \\ :asc),
-    do: Enum.sort_by(documents, & &1.published_at, {sort_direction, NaiveDateTime})
+  defp sort_documents_by_date(documents, sort_direction \\ :asc, field_name \\ :published_at),
+    do: Enum.sort_by(documents, & Map.get(&1, field_name), {sort_direction, NaiveDateTime})
 
   defp exclude_index(documents),
     do: Enum.reject(documents, fn document -> document.id == "index" end)

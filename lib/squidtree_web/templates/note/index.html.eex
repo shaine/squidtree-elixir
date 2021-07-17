@@ -1,27 +1,38 @@
+<% generate_content = fn(document, i, %{day: day, content: content, length: length}) -> %>
+  <%= content %>
+  <%# Gotta check day and year to see if this is a differnt day from the last %>
+  <%= if {document.modified_at.year, document.modified_at.month, document.modified_at.day} != day do %>
+    </ul>
+
+    <h3><%= date_format(document.modified_at) %></h3>
+
+    <ul>
+  <% end %>
+
+  <li><%= raw(document.title_html) %> <a href="<%= document.path %>"><%= document.id %></a> <em>(from <%= date_format(document.published_at) %>)</em></li>
+
+  <%= if i == length - 1 do %></ul><% end %>
+<% end %>
+<%
+show_list = fn(list) -> Enum.reduce(Enum.with_index(list), %{day: 0, month: 0, year: 0, content: "", length: length(list)}, fn({document, i}, accum) ->
+  %{
+    day: {document.modified_at.year, document.modified_at.month,
+    document.modified_at.day},
+    content: generate_content.(document, i, accum),
+    length: accum.length
+  }
+end ).content end %>
+
 <article>
   <div class="post-content">
     <h1>Notes index.</h1>
 
-    <p>
-      This is a Zettelkasten <a href="0G1C1">0G1C1</a>, which is a note taking system which seeks to deeply integrate knowledge rather than merely record information.
-    </p>
-
-    <h2>Recent Additions</h2>
-
-    <p>Notes that have recently been added into the system.</p>
-
-    <ul><%= for note <- @recent_notes do %>
-      <li><%= raw(note.title_html) %> <a href="<%= note.path %>"><%= note.id %></a></li>
-    <% end %></ul>
-
-    <h2>Recent Sources</h2>
-
-    <p>Other people's words which have been feeding this system of late.</p>
-
-    <ul><%= for reference <- @recent_references do %>
-      <li><%= raw(reference.title_html) %> <a href="<%= reference.path %>"><%= reference.id %></a></li>
-    <% end %></ul>
+    <p class="introduction">This is a Zettelkasten <a href="0G1C1">0G1C1</a>, which is a note taking system seeking to deeply integrate ideas together rather than merely record information.</p>
 
     <%= render("_note.html", %{assigns | title_html: nil}) %>
+
+    <h2>Recent Changes</h2>
+
+    <%= show_list.(@recent_notes) %>
   </div>
 </article>

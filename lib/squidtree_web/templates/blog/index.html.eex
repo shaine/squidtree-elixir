@@ -1,6 +1,8 @@
 <h1>Blog</h1>
 
-<% generate_content = fn(blog_post, i, %{month: month, year: year, content: content}) -> %>
+<p class="introduction">When themes emerge in the <a href="/notes">notes</a>, this is where those ideas will be written up for the enjoyment of others.</p>
+
+<% generate_content = fn(blog_post, i, %{month: month, year: year, content: content, length: length}) -> %>
   <%= content %>
   <%= if blog_post.published_at.year != year do %>
     <%# Previous year ended so close the UL before continuing, unless this is the first post %>
@@ -20,14 +22,17 @@
   <% end %>
 
   <li><a href="<%= blog_post.path %>"><%= raw(blog_post.title_html) %></a></li>
+
+  <%= if i == length - 1 do %></ul><% end %>
 <% end %>
 
 <%=
-Enum.reduce(Enum.with_index(@blog_posts), %{month: 0, year: 0, content: ""}, fn({blog_post, i}, accum) ->
+Enum.reduce(Enum.with_index(@blog_posts), %{month: 0, year: 0, content: "", length: length(@blog_posts)}, fn({blog_post, i}, accum) ->
   %{
     year: blog_post.published_at.year,
     month: {blog_post.published_at.year,
     blog_post.published_at.month},
-    content: generate_content.(blog_post, i, accum)
+    content: generate_content.(blog_post, i, accum),
+    length: accum.length
   }
 end ).content %>

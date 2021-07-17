@@ -297,6 +297,12 @@ ul, ul[class] {
   }
 }
 
+.introduction {
+  font-size: 1.3em;
+  line-height: 1.2em;
+  font-weight: bold;
+}
+
 @media (min-width: $breakpoint-desktop) {
   .content-wrap {
     padding-bottom: 30px;

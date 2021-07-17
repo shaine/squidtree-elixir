@@ -1,7 +1,7 @@
 <article>
   <h1>About Squidtree</h1>
 
-  <p>Squidtree is a place for Shaine Hatch to keep his words, in the form of <a href="/notes">Zettelkasten notes</a> and <a href="/blog">his blog</a>. Many of the ideas here come from other people's words as is captured in the <a href="/references">references</a>.</p>
+  <p class="introduction">Squidtree is a place for Shaine Hatch to keep his words, in the form of <a href="/notes">Zettelkasten notes</a> and <a href="/blog">his blog</a>. Many of the ideas here come from other people's words as is captured in the <a href="/references">references</a>.</p>
 
   <h2>The Author</h2>
 

@@ -1,6 +1,8 @@
 <h1>References</h1>
 
-<% generate_content = fn(reference, i, %{month: month, year: year, content: content}) -> %>
+<p class="introduction">This is the works cited page for the website. Individual <a href="/notes">notes</a> link to these references where they were sourced from an author's writing.</p>
+
+<% generate_content = fn(reference, i, %{month: month, year: year, content: content, length: length}) -> %>
   <%= content %>
   <%= if reference.published_at.year != year do %>
     <%# Previous year ended so close the UL before continuing, unless this is the first post %>
@@ -20,14 +22,17 @@
   <% end %>
 
   <li><a href="<%= reference.path %>"><%= raw(reference.title_html) %></a></li>
+
+  <%= if i == length - 1 do %></ul><% end %>
 <% end %>
 
 <%=
-Enum.reduce(Enum.with_index(@references), %{month: 0, year: 0, content: ""}, fn({reference, i}, accum) ->
+Enum.reduce(Enum.with_index(@references), %{month: 0, year: 0, content: "", length: length(@references)}, fn({reference, i}, accum) ->
   %{
     year: reference.published_at.year,
     month: {reference.published_at.year,
     reference.published_at.month},
-    content: generate_content.(reference, i, accum)
+    content: generate_content.(reference, i, accum),
+    length: accum.length
   }
 end ).content %>
