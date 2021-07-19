@@ -273,6 +273,10 @@ ul, ul[class] {
     position: absolute;
     width: 1em;
   }
+
+  li span {
+    color: var(--accent-text-color);
+  }
 }
 
 .post-meta {

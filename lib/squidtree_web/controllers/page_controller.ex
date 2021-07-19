@@ -6,15 +6,11 @@ defmodule SquidtreeWeb.PageController do
   alias SquidtreeWeb.Router.Helpers
   alias Squidtree.DocumentServer
 
-  @home_description "A place for Shaine Hatch to store his words."
-  @about_description "Squidtree is a place for Shaine Hatch to keep his words, in the form of Zettelkasten notes and blog content."
-  @sitemap_description "Sitemap"
-
   def index(conn, _params) do
     with {:ok, recent_notes} <- DocumentServer.get_most_recent_notes(3),
          {:ok, recent_blog_posts} <- DocumentServer.get_most_recent_blog_posts(3) do
       render(conn, :home, %{
-        page_description: @home_description,
+        page_description: "A place for Shaine Hatch to store his words.",
         layout_name: :home,
         recent_notes: recent_notes,
         recent_blog_posts: recent_blog_posts
@@ -24,7 +20,8 @@ defmodule SquidtreeWeb.PageController do
 
   def about(conn, _params) do
     render(conn, :about, %{
-      page_description: @home_description,
+      title: "About Shaine Hatch and his Squidtree",
+      page_description: "Squidtree is a place for Shaine Hatch to write and think. He's been trying to make it since 2008.",
       layout_name: :page
     })
   end
@@ -36,10 +33,11 @@ defmodule SquidtreeWeb.PageController do
       conn
       |> put_view(SquidtreeWeb.SitemapView)
       |> render("sitemap.#{format}", %{
+        title: "Sitemap",
         blog_posts: blog_posts,
         references: references,
         notes: notes,
-        page_description: @sitemap_description,
+        page_description: "Sitemap",
         layout_name: :page
       })
     else

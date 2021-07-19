@@ -26,7 +26,7 @@ defmodule Squidtree.DocumentIndexTask do
     end
   end
 
-  defp perform_indexing do
+  def perform_indexing do
     IO.puts("Starting DocumentIndexTask")
 
     DocumentServer.destroy_cache()

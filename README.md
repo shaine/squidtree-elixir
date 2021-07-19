@@ -19,12 +19,14 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ### Next Up
 
+- Display random notes on index
 - Create cache reset endpoint
 - Add search feature
 - Explain chosen color
 
 ### Longterm
 
+- Allow localstorage edits on notes
 - Add background variations incl date color
 - Blog tags
 - Add note link preview on hover

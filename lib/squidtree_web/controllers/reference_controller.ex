@@ -8,6 +8,7 @@ defmodule SquidtreeWeb.ReferenceController do
   def index(conn, _params) do
     with {:ok, references} <- DocumentServer.get_all_references() do
       render(conn, :index, %{
+        title: "References",
         references: references,
         year: 0,
         month: 0,

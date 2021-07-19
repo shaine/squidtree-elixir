@@ -15,6 +15,7 @@ date: <%= NaiveDateTime.to_date(@published_at) %></pre><% end %>
   <p>This reference hasn't been documented yet, but there's plenty to learn from it.</p>
   <% end %>
 
+<%= if length(@notes) > 0 do %>
   <aside class="reference-notes-list">
     <h1>Referencing Notes</h1>
 
@@ -22,4 +23,5 @@ date: <%= NaiveDateTime.to_date(@published_at) %></pre><% end %>
       <li><%= raw(note.title_html) %> <a href="<%= note.path %>"><%= note.id %></a></li><% end %>
     </ul>
   </aside>
+<% end %>
 </div>

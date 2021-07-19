@@ -12,6 +12,7 @@ defmodule SquidtreeWeb.BlogController do
       {:ok, blog_posts} ->
         conn
         |> render(:index, %{
+          title: "Blog",
           layout_name: :blog,
           base_path: "/blog/",
           page_description: @blog_description,

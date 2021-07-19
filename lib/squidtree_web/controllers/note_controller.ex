@@ -5,8 +5,6 @@ defmodule SquidtreeWeb.NoteController do
 
   alias Squidtree.DocumentServer
 
-  @notes_description "Shaine Hatch's Zettelkasten about engineering, leadership, and probably some other stuff."
-
   def index(conn, params) do
     with {:ok, recent_notes} <- DocumentServer.get_most_recent_notes(10, :modified_at),
          {:ok, note} <- DocumentServer.get_note("index") do
@@ -14,8 +12,9 @@ defmodule SquidtreeWeb.NoteController do
         conn,
         :index,
         assigns_from_content(note, %{
+          title: "Notes index",
           recent_notes: recent_notes,
-          page_description: @notes_description
+          page_description: "Shaine Hatch's Zettelkasten about engineering, leadership, and probably some other stuff."
         })
       )
     else
