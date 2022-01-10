@@ -72,12 +72,19 @@ defmodule Squidtree.DocumentParser do
 
   defp set_title_html({_, _, _, content_data} = token) do
     Map.get(content_data, "title", content_data[:slug])
+    # This is mostly to access the features of Smartypants, which are not exposed
+    |> Earmark.as_html(escape: false)
+    |> fn {:ok, parsed_html, _warnings} -> parsed_html end.()
+    # Remove the wrapping paragraphs
+    |> String.replace(~r/^<p>/, "")
+    |> String.replace(~r/<\/p>$/, "")
     |> set_field(token, :title_html)
   end
 
-  defp set_title({_, _, _, content_data} = token) do
-    Map.get(content_data, "title", content_data[:slug])
+  defp set_title({_, %{title_html: title_html}, _, _} = token) do
+    title_html
     |> HtmlSanitizeEx.strip_tags()
+    |> String.trim
     |> set_field(token, :title)
   end
 
@@ -177,6 +184,7 @@ defmodule Squidtree.DocumentParser do
   defp content_pre_process(content_md) do
     content_md
     # Remove redundant H1
+    # Relevant to layouts that separate the H1 from the text
     |> String.replace(~r/^# .*/m, "")
   end
 
