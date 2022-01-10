@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e # Abort on error
+
+echo "Running docker image"
+docker run -p 4000:4000 -v ~/Documents/notes/zk:/app/priv/note_contents:ro -v ~/Documents/notes/publications:/app/priv/blog_contents:ro -it          $(docker images --format "{{.ID}} {{.CreatedAt}}" | sort -rk 2 | awk 'NR==1{print $1}')

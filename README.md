@@ -10,10 +10,10 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ## Production
 
-- Build the docker image: `. ./.env; docker build --build-arg SECRET_KEY_BASE -t squidtree .`
-- Run the docker image: `docker run -p 4000:4000 -v ~/Documents/notes/zk:/app/priv/note_contents:ro -v ~/Documents/notes/publications:/app/priv/blog_contents:ro -it $(docker images --format "{{.ID}} {{.CreatedAt}}" | sort -rk 2 | awk 'NR==1{print $1}')`
-- Verify the image by visiting <http://localhost:4000>
-- Export the image for import: `docker save squidtree:latest | gzip > squidtree.tar.gz`
+- Save the build to `./squidtree.tar.gz` via `bin/docker-build`
+- Optionally run the docker image locally: `docker run -p 4000:4000 -v ~/Documents/notes/zk:/app/priv/note_contents:ro -v ~/Documents/notes/publications:/app/priv/blog_contents:ro -it $(docker images --format "{{.ID}} {{.CreatedAt}}" | sort -rk 2 | awk 'NR==1{print $1}')`
+  - Verify the image by visiting <http://localhost:4000>
+- Upload the image to Docker and start a new container with the correct locations mapped as above
 
 ## TODO
 

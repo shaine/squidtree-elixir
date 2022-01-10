@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e # Abort on error
 
+rm squidtree.tar.gz
+
 . ./.env
 
 echo "Building docker image"
