@@ -109,8 +109,13 @@ main {
   display: inline-block;
   font-size: 26px;
   font-weight: bold;
+  line-height: 0;
   transition: var(--fade-time);
   width: 200px;
+
+  svg {
+    margin-bottom: 11px;
+  }
 
   #logo-circle {
     fill: var(--date-color) !important;
