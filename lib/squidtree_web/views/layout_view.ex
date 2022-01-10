@@ -25,6 +25,7 @@ defmodule SquidtreeWeb.LayoutView do
 
     assigns = put_in(assigns, [:page_title], page_title)
     assigns = put_in(assigns, [:date_color], hex_color_string(color))
+    assigns = put_in(assigns, [:date_color_light], lighten_color(color) |> hex_color_string)
     assigns = put_in(assigns, [:date_color_decimals], dec_color_list_string(color))
     assigns = put_in(assigns, [:layout_name], layout_name)
     assigns = put_in(assigns, [:year], DateTime.utc_now().year)
@@ -37,6 +38,8 @@ defmodule SquidtreeWeb.LayoutView do
     |> CssColors.rgb()
     |> to_string
   end
+
+  defp lighten_color(color), do: CssColors.lighten(color, 0.32)
 
   defp dec_color_list_string(%CssColors.HSL{} = color),
     do: dec_color_list_string(CssColors.rgb(color))

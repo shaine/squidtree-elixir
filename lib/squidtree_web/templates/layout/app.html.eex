@@ -41,6 +41,7 @@
     <style>
       :root {
         --date-color: <%= assigns[:date_color] %>;
+        --date-text-color: <%= assigns[:date_color_light] %>;
         --date-color-decimals: <%= assigns[:date_color_decimals] %>;
       }
 

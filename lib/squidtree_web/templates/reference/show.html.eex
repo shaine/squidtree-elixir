@@ -20,7 +20,7 @@ date: <%= NaiveDateTime.to_date(@published_at) %></pre><% end %>
     <h1>Referencing Notes</h1>
 
     <ul class="reference-notes"><%= for note <- @notes do %>
-      <li><%= raw(note.title_html) %> <a href="<%= note.path %>"><%= note.id %></a></li><% end %>
+      <li><a href="<%= note.path %>"><%= raw(note.title_html) %></a></li><% end %>
     </ul>
   </aside>
 <% end %>

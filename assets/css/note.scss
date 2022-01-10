@@ -1,35 +1,5 @@
-.layout-note .post-content, .layout-reference .reference-content {
-  a {
-    transition: var(--fade-time);
-  }
-
-  a::before {
-    color: var(--date-color);
-    content: "[[";
-    transition: var(--fade-time);
-  }
-
-  a::after {
-    color: var(--date-color);
-    content: "]]";
-    transition: var(--fade-time);
-  }
-
-  a:link, a:visited {
-    color: var(--date-color);
-  }
-
+.layout-note .post-content {
   a:active, a:hover {
-    color: var(--accent-text-color);
+    color: var(--date-color);
   }
-
-  a:active, a:hover {
-    &::before, &::after {
-      color: var(--accent-text-color);
-      transition: var(--fade-time);
-    }
-  }
-}
-
-.layout-note {
 }

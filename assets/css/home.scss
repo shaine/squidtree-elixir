@@ -1,4 +1,16 @@
 $nav-spacing: 15px;
+
+@mixin primary-text-date-span {
+  color: var(--primary-text-color);
+  transition: var(--fade-time);
+  text-decoration: none;
+
+  span {
+    color: var(--accent-text-color);
+    transition: var(--fade-time);
+  }
+}
+
 body.layout-home {
   background-color: var(--accent-background);
   text-align: center;
@@ -41,6 +53,20 @@ body.layout-home {
       &:first-child {
         margin-top: 0;
       }
+
+      a:link, a:visited {
+        @include primary-text-date-span;
+      }
+
+      a:hover, a:active {
+        color: var(--accent-text-color);
+        transition: var(--fade-time);
+
+        span {
+          color: var(--date-color);
+          transition: var(--fade-time);
+        }
+      }
     }
 
     ul, ol {
@@ -60,11 +86,6 @@ body.layout-home {
         line-height: 1.4em;
         padding-bottom: 5px;
       }
-    }
-
-    a:hover, a:active {
-      color: var(--accent-text-color);
-      transition: var(--fade-time);
     }
   }
 

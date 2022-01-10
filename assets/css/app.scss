@@ -2,19 +2,19 @@ $breakpoint-desktop: 700px;
 
 @mixin list-link {
   a:link, a:visited {
-    color: var(--primary-text-color);
+    color: var(--accent-text-color);
     transition: var(--fade-time);
-    text-decoration: none;
 
     span {
-      color: var(--accent-text-color);
+      color: var(--aside-text-color);
       transition: var(--fade-time);
     }
   }
 
   a:hover, a:active {
-    color: var(--accent-text-color);
+    color: var(--primary-text-color);
     transition: var(--fade-time);
+    text-decoration: none;
 
     span {
       color: var(--date-color);
@@ -29,7 +29,7 @@ $breakpoint-desktop: 700px;
   --accent-background: #2A2A2F;
   --primary-text-color: #FFFFFF;
   --accent-text-color: #FFFFFF80;
-  --aside-text-color: #FFFFFFA0;
+  --aside-text-color: #FFFFFFCC;
   --fade-time: 0.3s;
   --primary-font-size: 18px;
   --small-font-size: 14px;
@@ -144,20 +144,18 @@ main {
 }
 
 h1 {
-  @include list-link;
-
   font-size: 2.5em;
   line-height: 1em;
   margin: 0 0 30px 0;
 
   span, b {
-    color: var(--accent-text-color);
+    color: var(--date-text-color);
     transition: var(--fade-time);
   }
 }
 
 h2 {
-  color: var(--accent-text-color);
+  color: var(--date-text-color);
   font-size: 1.7em;
   font-weight: bold;
   margin: 30px 0 10px;
@@ -171,7 +169,7 @@ h3 {
 }
 
 h4 {
-  color: var(--accent-text-color);
+  color: var(--date-color);
   font-size: 1em;
   font-weight: bold;
   margin: 30px 0 10px;
@@ -231,9 +229,16 @@ pre, code {
   }
 
   a:hover, a:active {
-    color: var(--accent-text-color);
+    color: var(--date-text-color);
     transition: var(--fade-time);
   }
+}
+
+pre code {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
 }
 
 cite {
@@ -275,7 +280,7 @@ ul, ul[class] {
   }
 
   li span {
-    color: var(--accent-text-color);
+    // color: var(--date-color);
   }
 }
 
@@ -286,19 +291,6 @@ ul, ul[class] {
 
 .post-header {
   margin-bottom: 30px;
-}
-
-.post-content, .reference-notes-list, .reference-citation {
-  a:link, a:visited {
-    color: var(--date-color);
-    text-decoration: underline;
-    transition: var(--fade-time);
-  }
-
-  a:active, a:hover {
-    color: var(--accent-text-color);
-    transition: var(--fade-time);
-  }
 }
 
 .introduction {
