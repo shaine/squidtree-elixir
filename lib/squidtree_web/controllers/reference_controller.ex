@@ -33,6 +33,7 @@ defmodule SquidtreeWeb.ReferenceController do
 
         conn
         |> put_view(SquidtreeWeb.ErrorView)
+        |> put_status(500)
         |> render(:"500")
     end
   end
@@ -46,6 +47,7 @@ defmodule SquidtreeWeb.ReferenceController do
       else
         conn
         |> put_view(SquidtreeWeb.ErrorView)
+        |> put_status(404)
         |> render(:"404")
       end
     end

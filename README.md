@@ -21,7 +21,6 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 - Add a Now page
 - Verify all citations are correct
-- Fix 404 = 500 error
 - Meta title and h1 need markdown character replacement, but not HTML
 
 ### Midterm

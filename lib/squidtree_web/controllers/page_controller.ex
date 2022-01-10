@@ -46,6 +46,7 @@ defmodule SquidtreeWeb.PageController do
 
         conn
         |> put_view(SquidtreeWeb.ErrorView)
+        |> put_status(500)
         |> render(:"500")
     end
   end
@@ -56,6 +57,7 @@ defmodule SquidtreeWeb.PageController do
     do:
       conn
       |> put_view(SquidtreeWeb.ErrorView)
+      |> put_status(404)
       |> render(:"404")
 
   def sitemap(conn, params) do

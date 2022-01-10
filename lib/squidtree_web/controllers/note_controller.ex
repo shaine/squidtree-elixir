@@ -21,6 +21,7 @@ defmodule SquidtreeWeb.NoteController do
       _ ->
         conn
         |> put_view(SquidtreeWeb.ErrorView)
+        |> put_status(500)
         |> render(:"500")
     end
   end
@@ -53,6 +54,7 @@ defmodule SquidtreeWeb.NoteController do
       {:not_found} ->
         conn
         |> put_view(SquidtreeWeb.ErrorView)
+        |> put_status(404)
         |> render(:"404")
 
       {:error, message} ->
@@ -60,6 +62,7 @@ defmodule SquidtreeWeb.NoteController do
 
         conn
         |> put_view(SquidtreeWeb.ErrorView)
+        |> put_status(500)
         |> render(:"500")
     end
   end
