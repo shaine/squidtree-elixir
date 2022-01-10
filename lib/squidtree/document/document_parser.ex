@@ -13,6 +13,7 @@ defmodule Squidtree.DocumentParser do
     |> set_title
     |> set_published_at
     |> set_title_slug
+    |> set_redirect
     |> set_references
     |> set_reference_slugs
     |> set_tags
@@ -110,6 +111,11 @@ defmodule Squidtree.DocumentParser do
     document.title
     |> Slug.slugify()
     |> set_field(token, :title_slug)
+  end
+
+  defp set_redirect({_status, _document, _warnings, content_data} = token) do
+    Map.get(content_data, "redirect")
+    |> set_field(token, :redirect)
   end
 
   defp set_references({_, _, _, %{"citation" => reference}} = token) when is_binary(reference) do

@@ -13,6 +13,7 @@ defmodule Squidtree.Document do
             title: "",
             title_slug: "",
             author: "",
+            redirect: nil,
             reference: "",
             reference_slugs: [],
             published_at: nil,

@@ -9,7 +9,7 @@
     <ul>
   <% end %>
 
-  <li><%= raw(document.title_html) %> <a href="<%= document.path %>"><%= document.id %></a> <em>(from <%= date_format(document.published_at) %>)</em></li>
+  <li><a href="<%= document.path %>"><%= raw(document.title_html) %></a> <em>(from <%= date_format(document.published_at) %>)</em></li>
 
   <%= if i == length - 1 do %></ul><% end %>
 <% end %>

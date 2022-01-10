@@ -234,7 +234,13 @@ defmodule Squidtree.DocumentServer do
     }
   end
 
-  defp all_cache_documents(type) do
+  defp all_cache_documents(:note) do
+    find_all_cache_documents(:note)
+    |> Enum.filter(fn document -> is_nil(document.redirect) end)
+  end
+  defp all_cache_documents(type), do: find_all_cache_documents(type)
+
+  defp find_all_cache_documents(type) do
     :ets.tab2list(DocumentType.table_name_for_type(type))
     |> Enum.map(fn {_slug, %{document: document}} -> document end)
   end

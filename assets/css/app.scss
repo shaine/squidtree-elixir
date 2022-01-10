@@ -12,12 +12,12 @@ $breakpoint-desktop: 700px;
   }
 
   a:hover, a:active {
-    color: var(--primary-text-color);
+    color: var(--date-color);
     transition: var(--fade-time);
     text-decoration: none;
 
     span {
-      color: var(--date-color);
+      color: var(--primary-text-color);
       transition: var(--fade-time);
     }
   }
