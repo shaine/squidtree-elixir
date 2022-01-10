@@ -26,7 +26,6 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 ### Midterm
 
 - Display random notes on index
-- Create cache reset endpoint
 - Add search feature
 - Explain chosen color
 

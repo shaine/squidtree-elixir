@@ -29,6 +29,7 @@ defmodule SquidtreeWeb.Router do
     get "/notes", NoteController, :index
     get "/references", ReferenceController, :index
     get "/references/:slug", ReferenceController, :show
+    get "/admin/cache_refresh", AdminController, :cache_refresh
   end
 
   # Other scopes may use custom stacks.
