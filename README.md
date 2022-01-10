@@ -19,6 +19,17 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ### Next Up
 
+- Allow notes to specify a redirect
+- Adjust link styling to be the normal sort
+- What are the options for adjusting the title emphasis?
+- Add a Now page
+- Verify all citations are correct
+- Fix 404 = 500 error
+- Meta title and h1 need markdown character replacement, but not HTML
+- Don't display links to files with redirects
+
+### Midterm
+
 - Display random notes on index
 - Create cache reset endpoint
 - Add search feature
