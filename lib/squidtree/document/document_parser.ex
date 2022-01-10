@@ -72,12 +72,14 @@ defmodule Squidtree.DocumentParser do
 
   defp set_title_html({_, _, _, content_data} = token) do
     Map.get(content_data, "title", content_data[:slug])
+    # Make the title a markdown h1. Earmak sometimes needs the text to have a wrapping element...
+    |> fn title_text -> "# #{title_text}" end.()
     # This is mostly to access the features of Smartypants, which are not exposed
     |> Earmark.as_html(escape: false)
     |> fn {:ok, parsed_html, _warnings} -> parsed_html end.()
     # Remove the wrapping paragraphs
-    |> String.replace(~r/^<p>/, "")
-    |> String.replace(~r/<\/p>$/, "")
+    |> String.replace(~r/^<h1>/, "")
+    |> String.replace(~r/<\/h1>$/, "")
     |> set_field(token, :title_html)
   end
 
