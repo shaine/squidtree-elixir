@@ -5,7 +5,7 @@ defmodule SquidtreeWeb.NoteController do
 
   alias Squidtree.DocumentServer
 
-  def index(conn, params) do
+  def index(conn, _params) do
     with {:ok, recent_notes} <- DocumentServer.get_most_recent_notes(10, :modified_at),
          {:ok, note} <- DocumentServer.get_note("index") do
       render(
@@ -14,7 +14,8 @@ defmodule SquidtreeWeb.NoteController do
         assigns_from_content(note, %{
           title: "Notes index",
           recent_notes: recent_notes,
-          page_description: "Shaine Hatch's Zettelkasten about engineering, leadership, and probably some other stuff."
+          page_description:
+            "Shaine Hatch's Zettelkasten about engineering, leadership, and probably some other stuff."
         })
       )
     else
@@ -42,10 +43,12 @@ defmodule SquidtreeWeb.NoteController do
             conn
             |> put_status(301)
             |> redirect(to: "/notes/#{redirect}")
+
           "/notes/#{slug}/#{id}" != path ->
             conn
             |> put_status(301)
             |> redirect(to: path)
+
           true ->
             conn
             |> render(:show, assigns_from_content(note))

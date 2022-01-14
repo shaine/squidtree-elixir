@@ -6,7 +6,7 @@ defmodule SquidtreeWeb.AdminController do
   alias Squidtree.DocumentIndexTask
 
   def cache_refresh(conn, _params) do
-    DocumentIndexTask.perform_indexing
+    DocumentIndexTask.perform_indexing()
 
     conn
     |> put_view(SquidtreeWeb.ErrorView)

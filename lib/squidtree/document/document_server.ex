@@ -181,8 +181,8 @@ defmodule Squidtree.DocumentServer do
   end
 
   @impl true
-  def handle_call({:get_recent_notes, count}, from, state), do:
-    handle_call({:get_recent_notes, count, :published_at}, from, state)
+  def handle_call({:get_recent_notes, count}, from, state),
+    do: handle_call({:get_recent_notes, count, :published_at}, from, state)
 
   @impl true
   def handle_call({:get_recent_notes, count, time_field_name}, _from, state) do
@@ -238,6 +238,7 @@ defmodule Squidtree.DocumentServer do
     find_all_cache_documents(:note)
     |> Enum.filter(fn document -> is_nil(document.redirect) end)
   end
+
   defp all_cache_documents(type), do: find_all_cache_documents(type)
 
   defp find_all_cache_documents(type) do
@@ -253,7 +254,7 @@ defmodule Squidtree.DocumentServer do
   end
 
   defp sort_documents_by_date(documents, sort_direction \\ :asc, field_name \\ :published_at),
-    do: Enum.sort_by(documents, & Map.get(&1, field_name), {sort_direction, NaiveDateTime})
+    do: Enum.sort_by(documents, &Map.get(&1, field_name), {sort_direction, NaiveDateTime})
 
   defp exclude_index(documents),
     do: Enum.reject(documents, fn document -> document.id == "index" end)

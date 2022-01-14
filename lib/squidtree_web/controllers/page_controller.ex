@@ -3,7 +3,6 @@ defmodule SquidtreeWeb.PageController do
 
   use SquidtreeWeb, :controller
 
-  alias SquidtreeWeb.Router.Helpers
   alias Squidtree.DocumentServer
 
   def index(conn, _params) do
@@ -21,7 +20,8 @@ defmodule SquidtreeWeb.PageController do
   def about(conn, _params) do
     render(conn, :about, %{
       title: "About Shaine Hatch and his Squidtree",
-      page_description: "Squidtree is a place for Shaine Hatch to write and think. He's been trying to make it since 2008.",
+      page_description:
+        "Squidtree is a place for Shaine Hatch to write and think. He's been trying to make it since 2008.",
       layout_name: :page
     })
   end
@@ -60,7 +60,7 @@ defmodule SquidtreeWeb.PageController do
       |> put_status(404)
       |> render(:"404")
 
-  def sitemap(conn, params) do
+  def sitemap(conn, _params) do
     sitemap(conn, format: :html)
   end
 end
