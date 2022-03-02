@@ -42,6 +42,7 @@ defmodule Squidtree.MixProject do
       {:gettext, "~> 0.11"},
       {:html_sanitize_ex, "~> 1.3.0-rc3"},
       {:jason, "~> 1.0"},
+      {:mix_audit, "~> 1.0", only: [:dev, :test], runtime: false},
       {:phoenix, "~> 1.5.3"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_dashboard, "~> 0.2.0"},
@@ -67,7 +68,7 @@ defmodule Squidtree.MixProject do
     [
       setup: ["deps.get", "cmd npm install --prefix assets"],
       test: ["test"],
-      validate: ["sobelow --config", "format", "credo --strict", "cmd mix test"]
+      validate: ["deps.audit", "sobelow --config", "format", "credo --strict", "cmd mix test"]
     ]
   end
 end

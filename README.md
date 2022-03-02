@@ -8,6 +8,13 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
+## Maintenance
+
+- Upgrade hex `mix local.hex`
+- Install deps `mix deps.get`
+- Update deps `mix deps.update --all`
+- Audit deps `mix deps.audit`
+
 ## Production
 
 - Save the build to `./squidtree.tar.gz` via `bin/docker-build`
@@ -19,19 +26,17 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ### Next Up
 
-- Add a Now page
+- Allow pages to load images
+- Make the homepage read from a markdown file
 - Verify all citations are correct
 - Build nested link display
   - Break down links into a structured link AST
 
-### Midterm
+### Longterm
 
 - Display random notes on index
 - Add search feature
 - Explain chosen color
-
-### Longterm
-
 - Allow localstorage edits on notes
 - Add background variations incl date color
 - Blog tags
