@@ -5,7 +5,7 @@ defmodule Squidtree.MixProject do
     [
       app: :squidtree,
       version: "0.1.0",
-      elixir: "~> 1.7",
+      elixir: "~> 1.13",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -43,6 +43,7 @@ defmodule Squidtree.MixProject do
       {:html_sanitize_ex, "~> 1.3.0-rc3"},
       {:jason, "~> 1.0"},
       {:mix_audit, "~> 1.0", only: [:dev, :test], runtime: false},
+      {:mix_test_watch, "~> 1.0", only: [:dev, :test], runtime: false},
       {:phoenix, "~> 1.5.3"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_dashboard, "~> 0.2.0"},
