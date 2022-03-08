@@ -14,7 +14,6 @@ defmodule SquidtreeWeb.BlogController do
         |> render(:index, %{
           title: "Blog",
           layout_name: :blog,
-          base_path: "/blog/",
           page_description: @blog_description,
           blog_posts: blog_posts
         })
@@ -70,7 +69,6 @@ defmodule SquidtreeWeb.BlogController do
       Map.from_struct(content)
       |> Map.merge(%{
         layout_name: :blog,
-        base_path: "/blog/",
         page_description: content.content_preview
       })
 end

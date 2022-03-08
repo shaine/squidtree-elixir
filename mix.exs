@@ -37,7 +37,7 @@ defmodule Squidtree.MixProject do
     [
       {:credo, "~> 1.2.0", only: [:dev, :test], runtime: false},
       {:css_colors, "~> 0.2.2"},
-      {:earmark, "~> 1.2"},
+      {:earmark, "~> 1.4"},
       # {:ex2ms, "~> 1.0"}, For advanced ETS table queries
       {:gettext, "~> 0.11"},
       {:html_sanitize_ex, "~> 1.3.0-rc3"},

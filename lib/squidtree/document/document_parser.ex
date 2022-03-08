@@ -193,20 +193,23 @@ defmodule Squidtree.DocumentParser do
   defp content_post_process(content_html) do
     content_html
     # Add automatic em tags to parens
-    |> String.replace(~r/\(/, "<em class=\"auto-em\">(")
+    |> String.replace(~r/\(/, "<em class=\"paren-em\">(")
     |> String.replace(~r/\)/, ")</em>")
   end
 
   defp set_content_html({_, _, _, %{content_md: content_md}} = token) do
-    case Earmark.as_html(content_md |> content_pre_process, wikilinks: true, escape: false) do
+    case Earmark.as_html(content_md |> content_pre_process, wikilinks: true, escape: false, footnotes: true) do
       {:ok, content_html, warnings} ->
         Enum.each(warnings, &Logger.warn/1)
 
         content_post_process(content_html)
         |> set_field(token, :content_html)
 
-      {:error, message} ->
-        set_warning("content_html: #{message}", token)
+      {:error, content_html, errors} ->
+        Enum.each(errors, fn {:error, line_number, message} -> Logger.warn("Line #{line_number}: #{message}") end)
+
+        content_post_process(content_html)
+        |> set_field(token, :content_html)
     end
   end
 

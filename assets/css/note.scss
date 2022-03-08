@@ -3,3 +3,11 @@
     color: var(--date-color);
   }
 }
+
+.footnotes {
+  .paren-em {
+    color: var(--primary-text-color) !important;
+    font-size: 1em !important;
+    font-style: normal;
+  }
+}

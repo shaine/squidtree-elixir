@@ -201,12 +201,15 @@ p {
 
 em {
   color: var(--aside-text-color);
-  font-size: 0.8em;
+
+  &.paren-em {
+    font-size: 0.8em;
+  }
 }
 
 blockquote {
   border-left: 3px solid var(--date-color);
-  color: var(--accent-text-color);
+  color: var(--aside-text-color);
   display: block;
   margin-left: 10px;
   padding-left: 10px;
@@ -250,9 +253,7 @@ cite {
   font-style: normal;
 
   em {
-    font-size: 1em;
-
-    &.auto-em {
+    &.paren-em {
       color: var(--primary-test-color);
       font-style: normal;
     }
@@ -283,10 +284,56 @@ ul, ul[class] {
     position: absolute;
     width: 1em;
   }
+}
 
-  li span {
-    // color: var(--date-color);
+ol, ol[class] {
+  @include list-link;
+
+  counter-reset: li;
+  line-height: 1.6em;
+  list-style: none;
+  margin: 0 0 15px 0;
+  padding-left: 1em;
+
+  li {
+    counter-increment: li;
+
+    p {
+      margin: 0;
+    }
   }
+
+  li::before {
+    color: var(--date-color);
+    content: counter(li) ".";
+    margin-left: -1em;
+    position: absolute;
+    width: 1em;
+  }
+}
+
+.footnote {
+  &::before {
+    content: "["
+  }
+  &::after {
+    content: "]"
+  }
+
+  font-size: 0.5em;
+  margin-left: 2px;
+  text-decoration: underline !important;
+  vertical-align: super;
+}
+
+.reversefootnote {
+  font-size: 0.5em;
+  margin-left: 2px;
+  vertical-align: super;
+}
+
+.footnotes {
+  font-size: 0.8em;
 }
 
 .post-meta {

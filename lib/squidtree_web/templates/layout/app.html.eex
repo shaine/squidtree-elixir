@@ -4,7 +4,9 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="<%= Map.get(assigns, :base_path, "/") %>" />
+    <%= if assigns[:base_path] do %>
+    <base href="<%= assigns[:base_path] %>" />
+    <% end %>
 
     <title><%= assigns[:page_title] %></title>
     <meta name="author" content="Shaine Hatch" />
