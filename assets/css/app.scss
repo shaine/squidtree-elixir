@@ -275,14 +275,14 @@ ul, ul[class] {
   line-height: 1.6em;
   list-style: none;
   margin: 0 0 15px 0;
-  padding-left: 1em;
+  padding-left: 1.8em;
 
   li::before {
     color: var(--date-color);
     content: "\25AA\00FE0E";
-    margin-left: -1em;
+    margin-left: -1.8em;
     position: absolute;
-    width: 1em;
+    width: 1.8em;
   }
 }
 
@@ -293,7 +293,7 @@ ol, ol[class] {
   line-height: 1.6em;
   list-style: none;
   margin: 0 0 15px 0;
-  padding-left: 1em;
+  padding-left: 1.8em;
 
   li {
     counter-increment: li;
@@ -306,9 +306,9 @@ ol, ol[class] {
   li::before {
     color: var(--date-color);
     content: counter(li) ".";
-    margin-left: -1em;
+    margin-left: -1.8em;
     position: absolute;
-    width: 1em;
+    width: 1.8em;
   }
 }
 
@@ -327,13 +327,16 @@ ol, ol[class] {
 }
 
 .reversefootnote {
-  font-size: 0.5em;
+  display: inline;
   margin-left: 2px;
-  vertical-align: super;
 }
 
 .footnotes {
   font-size: 0.8em;
+
+  p {
+    display: inline;
+  }
 }
 
 .post-meta {

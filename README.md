@@ -26,7 +26,6 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ### Next Up
 
-- Allow pages to load images
 - Make the homepage read from a markdown file
 - Verify all citations are correct
 - Build nested link display
@@ -34,6 +33,7 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 - Add updated dates to posts
 - Add updated dates to notes?
 - Allow any arbitrary folder structure in the blog posts folder?
+- Sign up for newsletter?
 
 ### Longterm
 
