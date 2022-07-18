@@ -23,7 +23,7 @@ defmodule SquidtreeWeb.ReferenceController do
     with slug <- params["slug"],
          {:ok, notes} <- DocumentServer.find_all_by_reference(slug),
          {:ok, reference} <- DocumentServer.get_reference(slug) do
-      render(conn, :show, assigns_from_content(reference, notes))
+      render(conn, :show, Map.merge(%{past_notes: []}, assigns_from_content(reference, notes)))
     else
       {:not_found} ->
         missing_reference(conn, params)

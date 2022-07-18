@@ -28,8 +28,6 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 - Make the homepage read from a markdown file
 - Verify all citations are correct
-- Build nested link display
-  - Break down links into a structured link AST
 - Add updated dates to posts
 - Add updated dates to notes?
 - Allow any arbitrary folder structure in the blog posts folder?

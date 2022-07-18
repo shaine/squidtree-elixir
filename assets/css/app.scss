@@ -302,6 +302,10 @@ ul, ul[class] {
     position: absolute;
     width: 1.8em;
   }
+
+  li > & {
+    margin-bottom: 0;
+  }
 }
 
 ol, ol[class] {

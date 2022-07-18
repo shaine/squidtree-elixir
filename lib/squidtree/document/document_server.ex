@@ -6,6 +6,7 @@ defmodule Squidtree.DocumentServer do
   use GenServer
 
   alias Squidtree.{Document, DocumentFileClient, DocumentParser, DocumentType}
+  alias Squidtree.Folgezettel
 
   def start_link(opts \\ []) do
     IO.puts("Starting DocumentServer")
@@ -166,7 +167,7 @@ defmodule Squidtree.DocumentServer do
       :reply,
       all_cache_documents(:note)
       |> find_all_by_reference_slug(reference_slug)
-      |> sort_documents_by_date,
+      |> sort_documents_by_id,
       state
     }
   end
@@ -201,7 +202,7 @@ defmodule Squidtree.DocumentServer do
     {
       :reply,
       all_cache_documents(:note)
-      |> sort_documents_by_date(:desc)
+      |> sort_documents_by_id
       |> exclude_index,
       state
     }
@@ -255,6 +256,8 @@ defmodule Squidtree.DocumentServer do
 
   defp sort_documents_by_date(documents, sort_direction \\ :asc, field_name \\ :published_at),
     do: Enum.sort_by(documents, &Map.get(&1, field_name), {sort_direction, NaiveDateTime})
+
+  defp sort_documents_by_id(documents), do: Enum.sort_by(documents, &Map.get(&1, :id), &Folgezettel.sort_ids/2)
 
   defp exclude_index(documents),
     do: Enum.reject(documents, fn document -> document.id == "index" end)

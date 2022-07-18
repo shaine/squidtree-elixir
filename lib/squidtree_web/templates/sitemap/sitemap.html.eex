@@ -25,9 +25,11 @@
   </ul>
 
   <h2>Notes</h2>
-  <ul>
-<%= for note <- @notes do %>
-    <li><a href="<%= note.path %>"><%= raw(note.title_html) %></a></li>
-<% end %>
+  <% %{processed: notes} = recurse_notes(@notes) %>
+  <ul><%= for note <- notes do %>
+    <%= for i <- 0..note.closed_parents_count, i > 0 do %></ul><% end %>
+    <li><a href="<%= note.path %>"><%= raw(note.title_html) %></a>
+      <%= if note.is_parent do %><ul><% end %>
+    </li><% end %>
   </ul>
 </section>
